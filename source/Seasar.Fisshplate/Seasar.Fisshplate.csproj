@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38FF2779-9195-41B3-994E-6057AF3318C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Seasar.Fisshplate</RootNamespace>
+    <AssemblyName>Seasar.Fisshplate</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Seasar.Fisshplate.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=028265cbccdfa80d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.Vsa" />
+    <Reference Include="NPOI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.DDF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.DDF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HPSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.HPSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HSSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.HSSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.POIFS, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.POIFS.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.Util, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NPOI.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consts\FPConsts.cs" />
+    <Compile Include="Context\FPContext.cs" />
+    <Compile Include="Context\PageContext.cs" />
+    <Compile Include="Core\BindVariable.cs" />
+    <Compile Include="Core\Element\AbstractBlock.cs" />
+    <Compile Include="Core\Element\AbstractCell.cs" />
+    <Compile Include="Core\Element\El.cs" />
+    <Compile Include="Core\Element\ElseBlock.cs" />
+    <Compile Include="Core\Element\ElseIfBlock.cs" />
+    <Compile Include="Core\Element\Exec.cs" />
+    <Compile Include="Core\Element\GenericCell.cs" />
+    <Compile Include="Core\Element\HorizontalIteratorBlock.cs" />
+    <Compile Include="Core\Element\IfBlock.cs" />
+    <Compile Include="Core\Element\IteratorBlock.cs" />
+    <Compile Include="Core\Element\Link.cs" />
+    <Compile Include="Core\Element\NullCell.cs" />
+    <Compile Include="Core\Element\NullElement.cs" />
+    <Compile Include="Core\Element\PageBreak.cs" />
+    <Compile Include="Core\Element\PageFooterBlock.cs" />
+    <Compile Include="Core\Element\PageHeaderBlock.cs" />
+    <Compile Include="Core\Element\Picture.cs" />
+    <Compile Include="Core\Element\Resume.cs" />
+    <Compile Include="Core\Element\Root.cs" />
+    <Compile Include="Core\Element\Row.cs" />
+    <Compile Include="Core\Element\Suspend.cs" />
+    <Compile Include="Core\Element\TemplateElement.cs" />
+    <Compile Include="Core\Element\VarElement.cs" />
+    <Compile Include="Core\Element\WhileBlock.cs" />
+    <Compile Include="EFPMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFPMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Exception\FPException.cs" />
+    <Compile Include="Exception\FPMergeException.cs" />
+    <Compile Include="Exception\FPParseException.cs" />
+    <Compile Include="Enum\LinkElementType.cs" />
+    <Compile Include="Parser\AbstractElseParser.cs" />
+    <Compile Include="Parser\CellParser.cs" />
+    <Compile Include="Parser\CommentParser.cs" />
+    <Compile Include="Parser\ElseBlockParser.cs" />
+    <Compile Include="Parser\ElseIfBlockParser.cs" />
+    <Compile Include="Parser\EndParser.cs" />
+    <Compile Include="Parser\ExecParser.cs" />
+    <Compile Include="Parser\FPParser.cs" />
+    <Compile Include="Parser\Handler\CellParserHandler.cs" />
+    <Compile Include="Parser\Handler\RowParserHandler.cs" />
+    <Compile Include="Parser\HorizontalIteratorBlockParser.cs" />
+    <Compile Include="Parser\IfBlockParser.cs" />
+    <Compile Include="Parser\IteratorBlockParser.cs" />
+    <Compile Include="Parser\LinkParser.cs" />
+    <Compile Include="Parser\PageBreakParser.cs" />
+    <Compile Include="Parser\PageFooterBlockParser.cs" />
+    <Compile Include="Parser\PageHeaderBlockParser.cs" />
+    <Compile Include="Parser\PictureParser.cs" />
+    <Compile Include="Parser\ResumeParser.cs" />
+    <Compile Include="Parser\RowParser.cs" />
+    <Compile Include="Parser\VarParser.cs" />
+    <Compile Include="Parser\WhileParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Template\FPTemplate.cs" />
+    <Compile Include="Util\EnumratorUtil.cs" />
+    <Compile Include="Util\FileInputStreamUtil.cs" />
+    <Compile Include="Util\FPPoiUtil.cs" />
+    <Compile Include="Util\ImageIOUtil.cs" />
+    <Compile Include="Util\InputStreamUtil.cs" />
+    <Compile Include="Util\JScriptUtil.cs" />
+    <Compile Include="Util\OgnlUtil.cs" />
+    <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="Wrapper\CellWrapper.cs" />
+    <Compile Include="Wrapper\RowWrapper.cs" />
+    <Compile Include="Wrapper\SheetWrapper.cs" />
+    <Compile Include="Wrapper\WorkbookWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Seasar.Fisshplate.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EFPMessages.ja-JP.resx" />
+    <EmbeddedResource Include="EFPMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EFPMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
