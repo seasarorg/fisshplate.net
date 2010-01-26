@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate", "Seasar.Fisshplate\Seasar.Fisshplate.csproj", "{38FF2779-9195-41B3-994E-6057AF3318C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate.Test", "Seasar.Fisshplate.Test\Seasar.Fisshplate.Test.csproj", "{63E35E56-A092-4D73-87FA-CD454919DDFB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC785555-6B9F-4832-A5B2-262BD0331844}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.S2Fisshplate", "Seasar.S2Fisshplate\Seasar.S2Fisshplate.csproj", "{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate.Sample", "Seasar.Fisshplate.Sample\Seasar.Fisshplate.Sample.csproj", "{AD541221-151F-41FC-A0CB-9C34C0B2B721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate.Test", "Seasar.Fisshplate.Test\Seasar.Fisshplate.Test.csproj", "{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,14 @@ Global
 		{38FF2779-9195-41B3-994E-6057AF3318C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38FF2779-9195-41B3-994E-6057AF3318C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38FF2779-9195-41B3-994E-6057AF3318C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63E35E56-A092-4D73-87FA-CD454919DDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63E35E56-A092-4D73-87FA-CD454919DDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63E35E56-A092-4D73-87FA-CD454919DDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63E35E56-A092-4D73-87FA-CD454919DDFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD541221-151F-41FC-A0CB-9C34C0B2B721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD541221-151F-41FC-A0CB-9C34C0B2B721}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD541221-151F-41FC-A0CB-9C34C0B2B721}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD541221-151F-41FC-A0CB-9C34C0B2B721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
