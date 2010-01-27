@@ -23,7 +23,7 @@ namespace Seasar.Fisshplate.Core.Element
         public override void MergeImpl(Seasar.Fisshplate.Context.FPContext context, NPOI.HSSF.UserModel.HSSFCell outCell)
         {
             string cellValue = CellValue.ToString();
-            Regex pat = new Regex(@"^\s*#picture\s*\(\s*(.*)\s+cell\s*=\s*([^\s]+)\s+row\s*=\s*([^\s]+)\s*\)");
+            Regex pat = new Regex(@"^\s*#picture\s*\(\s*(\S*)\s+cell\s*=\s*(\S+)\s+row\s*=\s*(\S+)\s*\)");
             Match mat = pat.Match(cellValue);
             if (mat.Success == false)
             {
@@ -31,7 +31,7 @@ namespace Seasar.Fisshplate.Core.Element
                     new object[] { cellValue }, _cell.Row);
             }
 
-            string picturePath = mat.Groups[0].Value;
+            string picturePath = mat.Groups[1].Value;
             string cellRange = mat.Groups[2].Value;
             string rowRange = mat.Groups[3].Value;
             int cellRangeIntVal = int.Parse(cellRange);
@@ -45,7 +45,7 @@ namespace Seasar.Fisshplate.Core.Element
 
         private void WritePicture(string picturePath, int cellRangeIntVal, int rowRangeIntVal, Seasar.Fisshplate.Context.FPContext context)
         {
-            FileStream imageFs = FileInputStreamUtil.CreateFileStream(picturePath);
+            using (Stream imageFs = FileInputStreamUtil.CreateReadFileStream(picturePath))
             using (Image img = Image.FromStream(imageFs))
             {
                 HSSFWorkbook workbook = _cell.Row.Sheet.Workbook.HSSFWorkbook;
@@ -82,16 +82,23 @@ namespace Seasar.Fisshplate.Core.Element
         private HSSFClientAnchor CreateAnchor(int imgWidth, int imgHeight, int cellNo, int rowNo, int cellRangeIntVal, int rowRangeIntVal)
         {
             HSSFClientAnchor anchor = new HSSFClientAnchor();
+            // Dx1は、Col1で指定したセルのx座標(0～1023)
             anchor.Dx1 = 0;
+            // Dy1は、Col2で指定したセルのy座標(0～1023)
             anchor.Dx2 = 0;
+            // Dy1は、Row1で指定したセルのy座標(0～255)
             anchor.Dy1 = 0;
-            anchor.Dy2 = 255;
+            // Dy1は、Row2で指定したセルのy座標(0～255)
+            anchor.Dy2 = 0; // 255;
 
             int fromCellNo = cellNo;
             int toCellNo = cellNo + cellRangeIntVal;
             int fromRowNo = rowNo;
             int toRowNo = rowNo + rowRangeIntVal;
 
+            // 指定された座標を始点と終点として画像を挿入する。
+            // 表示範囲は、 Col2-Col1、Row2-Row1
+            // 終点のセルは、左上の座標を指定することに注意。
             anchor.Col1 = fromCellNo;
             anchor.Col2 = toCellNo;
             anchor.Row1 = fromRowNo;
@@ -103,11 +110,7 @@ namespace Seasar.Fisshplate.Core.Element
 
         private bool IsWritePicture(string picturePath)
         {
-            if (picturePath == string.Empty)
-            {
-                return false;
-            }
-            if (picturePath.Length <= 0)
+            if (String.IsNullOrEmpty(picturePath))
             {
                 return false;
             }

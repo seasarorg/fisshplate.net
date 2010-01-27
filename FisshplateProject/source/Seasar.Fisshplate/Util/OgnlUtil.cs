@@ -52,11 +52,11 @@ namespace Seasar.Fisshplate.Util
                 return expression;
             }
             // data.～の形式の場合
-            Match mat = Regex.Match(expression, @"^data\.(\S[^\.\[\]]+)(\S*)");
-            if (mat.Success)
-            {
-                return "data['" + mat.Groups[1].Value + "']" + mat.Groups[2].Value;
-            }
+            //Match mat = Regex.Match(expression, @"^data\.(\S[^\.\[\]]+)(\S*)");
+            //if (mat.Success)
+            //{
+            //    return "data['" + mat.Groups[1].Value + "']" + mat.Groups[2].Value;
+            //}
             
             // "data"以外の値の場合(変数一つか、最初が"."区切りか、"[" がある)
             Match mat2 = Regex.Match(expression, @"^([^\s\.\[]+)((\.|\[).*)?");

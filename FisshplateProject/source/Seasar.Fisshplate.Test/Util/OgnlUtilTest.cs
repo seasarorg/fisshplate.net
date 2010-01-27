@@ -14,7 +14,14 @@ namespace Seasar.Fisshplate.Test.Util
         {
             string str = "name = data['hoge'] + (data.fuga - moge) && || sage";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("data['name'] = data['hoge'] + (data['fuga'] - data['moge']) && || data['sage']", exp);
+            Assert.AreEqual("data['name'] = data['hoge'] + (data['data'].fuga - data['moge']) && || data['sage']", exp);
+        }
+
+        public void Test変数名がdataの場合()
+        {
+            string str = "name = data + data.fuga";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("data['name'] = data['data'] + data['data'].fuga", exp);
         }
     }
 }
