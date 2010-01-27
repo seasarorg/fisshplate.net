@@ -96,9 +96,11 @@
     <Compile Include="Parser\FPParserTest.cs" />
     <Compile Include="Parser\HForEachParserTest.cs" />
     <Compile Include="Parser\LinkParserTest.cs" />
+    <Compile Include="Parser\PictureParserTest.cs" />
     <Compile Include="Parser\WhileParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexTest\RegexTest.cs" />
+    <Compile Include="Template\FPTemplatePictureTest.cs" />
     <Compile Include="Template\FPTemplateTest.cs" />
     <Compile Include="Template\TemplateValueTest.cs" />
     <Compile Include="Util\JScriptUtilTest.cs" />
@@ -113,6 +115,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ElTest_multi.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplatePictureTest.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplatePictureTest2.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplatePictureTest3.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FPTemplateTest.xls">
@@ -145,6 +156,17 @@
       <Project>{38FF2779-9195-41B3-994E-6057AF3318C2}</Project>
       <Name>Seasar.Fisshplate</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="picture3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="picture1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="picture2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

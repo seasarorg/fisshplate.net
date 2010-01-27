@@ -34,7 +34,7 @@ namespace Seasar.Fisshplate.Test.Element
                 FPTemplate fp = new FPTemplate();
                 wb = fp.Process(s, data);
             }
-            using (Stream fos = new FileStream(_appDirectory + @"\HorizonalIterator.xls", FileMode.OpenOrCreate, FileAccess.Write))
+            using (Stream fos = new FileStream("out_HorizonalIterator.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(fos);
             }

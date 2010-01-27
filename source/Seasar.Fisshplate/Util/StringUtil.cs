@@ -9,7 +9,7 @@ namespace Seasar.Fisshplate.Util
         public static string ParseSuffix(string picturePath)
         {
             int lastSeparatorIndex = picturePath.LastIndexOf('.');
-            string suffix = picturePath.Substring(lastSeparatorIndex + 1, picturePath.Length);
+            string suffix = picturePath.Substring(lastSeparatorIndex + 1);
             return suffix;
         }
     }

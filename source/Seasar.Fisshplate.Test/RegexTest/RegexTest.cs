@@ -65,5 +65,18 @@ namespace Seasar.Fisshplate.Test.RegexTest
             Assert.AreEqual<string>("", m.Groups[6].Value);
         }
 
+        private string picStr = @"^\s*#picture\s*\(\s*\S+\s+cell\s*=\s*\S+\s+row\s*=\s*\S+\s*\)";
+
+        [Test]
+        public void TestPictuireRegex()
+        {
+            Regex regex = new Regex(picStr);
+            Match m = regex.Match(" #picture(${data.picture!} cell=1 row=1) ");
+
+            Assert.IsTrue(m.Success);
+            
+
+        }
+
     }
 }

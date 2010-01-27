@@ -8,7 +8,7 @@ namespace Seasar.Fisshplate.Util
 {
     public static class FileInputStreamUtil
     {
-        public static FileStream CreateFileStream(string filePath)
+        public static FileStream CreateReadFileStream(string filePath)
         {
             try
             {
