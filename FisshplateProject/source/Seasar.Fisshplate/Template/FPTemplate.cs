@@ -35,7 +35,7 @@ namespace Seasar.Fisshplate.Template
             _parser.AddRowParser(rowParser);
         }
 
-        public HSSFWorkbook Process(string templateName, Dictionary<string, object> data)
+        public HSSFWorkbook Process(string templateName, IDictionary<string, object> data)
         {
             FileStream fs = InputStreamUtil.GetResourceAsStream(templateName);
             HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(fs));
@@ -43,12 +43,12 @@ namespace Seasar.Fisshplate.Template
             return Process(workbook, data);
         }
 
-        public HSSFWorkbook Process(Stream ins, Dictionary<string, object> data)
+        public HSSFWorkbook Process(Stream ins, IDictionary<string, object> data)
         {
             return Process(new HSSFWorkbook(new POIFSFileSystem(ins)), data);
         }
 
-        public HSSFWorkbook Process(HSSFWorkbook hssfWorkbook, Dictionary<string, object> data)
+        public HSSFWorkbook Process(HSSFWorkbook hssfWorkbook, IDictionary<string, object> data)
         {
             WorkbookWrapper workbook = new WorkbookWrapper(hssfWorkbook);
             for (int i = 0; i < workbook.SheetCount; i++)

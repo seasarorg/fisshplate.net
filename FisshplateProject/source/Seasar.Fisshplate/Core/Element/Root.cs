@@ -46,7 +46,11 @@ namespace Seasar.Fisshplate.Core.Element
 
             for (int i = currentRowNum; i <= lasRowNum; i++)
             {
-                outSheet.RemoveRow(outSheet.GetRow(i));
+                HSSFRow row = outSheet.GetRow(i);
+                if (row != null)
+                {
+                    outSheet.RemoveRow(outSheet.GetRow(i));
+                }
             }
         }
 

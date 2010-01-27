@@ -92,7 +92,9 @@ namespace Seasar.Fisshplate.Core.Element
             CellRangeAddress reg = new CellRangeAddress(
                 rowFrom, rowFrom + _relativeMergedRowNumTo,
                 columnFrom, columnFrom + _relativeMergedColumnTo);
-            HSSFSheet hssfSheet = _cell.Row.Sheet.HSSFSheet;
+            //HSSFSheet hssfSheet = _cell.Row.Sheet.HSSFSheet;
+            //FISSHPLATE-52
+            HSSFSheet hssfSheet = context.OutSheet;
             hssfSheet.AddMergedRegion(reg);
         }
         #endregion

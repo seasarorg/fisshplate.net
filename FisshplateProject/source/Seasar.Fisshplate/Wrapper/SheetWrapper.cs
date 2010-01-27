@@ -56,6 +56,9 @@ namespace Seasar.Fisshplate.Wrapper
         public void RemoveRow(int i)
         {
             RowWrapper row = this.GetRow(i);
+            //全てのセルを削除　NPOI1.2.1のバグ対応
+            row.HSSFRow.RemoveAllCells();
+
             _hssfSheet.RemoveRow(row.HSSFRow);
             _rowList.RemoveAt(i);
         }
@@ -71,11 +74,14 @@ namespace Seasar.Fisshplate.Wrapper
 
         private void RemoveAllRow()
         {
-            for (int i = 0; i < RowCount; i++)
+            for (int i = 0; i < RowCount - 1; i++)
             {
                 HSSFRow hssfRow = GetRow(i).HSSFRow;
                 if (hssfRow != null)
                 {
+                    // 全てのセルを削除　NPOI1.2.1のバグ対応
+                    hssfRow.RemoveAllCells();
+
                     _hssfSheet.RemoveRow(hssfRow);
                 }
             }
@@ -83,7 +89,9 @@ namespace Seasar.Fisshplate.Wrapper
 
         private void RemoveAllMergedRegion()
         {
-            for (int i = 0; i < _hssfSheet.NumMergedRegions; i++)
+            int numMergedRegions = _hssfSheet.NumMergedRegions;
+
+            for (int i = 0; i < numMergedRegions; i++)
             {
                 _hssfSheet.RemoveMergedRegion(0);
             }
