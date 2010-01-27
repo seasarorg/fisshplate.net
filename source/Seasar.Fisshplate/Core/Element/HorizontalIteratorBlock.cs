@@ -141,7 +141,7 @@ namespace Seasar.Fisshplate.Core.Element
             data[FPConsts.RowNumberName] = context.CurrentRowNum + 1;
             for (int i = 0; i < row.CellElementList.Count; i++)
             {
-                if (i > _startCellIndex)
+                if (i >= _startCellIndex)
                 {
                     break;
                 }

@@ -13,7 +13,7 @@ namespace Seasar.Fisshplate.Context
         private HSSFSheet _outSheet;
         private int _currentRowNum;
         private int _currentCellNum;
-        private Dictionary<string, object> _data;
+        private IDictionary<string, object> _data;
         private bool _shouldHeaderOut;
         private bool _shouldFooterOut;
         private bool _skipMerge = false;
@@ -29,7 +29,7 @@ namespace Seasar.Fisshplate.Context
         /// </summary>
         /// <param name="outSheet">出力するシート</param>
         /// <param name="data">埋め込むデータ</param>
-        public FPContext(HSSFSheet outSheet, Dictionary<string, object> data)
+        public FPContext(HSSFSheet outSheet, IDictionary<string, object> data)
         {
             this._outSheet = outSheet;
             this._data = data;
