@@ -11,13 +11,17 @@ namespace Seasar.Fisshplate.Util
         /// <summary>
         /// Java版と違い、 JScript.NETで式を解決する。
         /// JScript.NETだと"data.title"のような式や "code" のような式が認識出来ない。
-        /// "data.title" -> "data['title']
-        /// "code" -> "data['code']
-        /// "data.title.hoge -> "data['title'].hoge
+        /// "code" -> "__obj__['code']
+        /// "data.title.hoge -> "__obj__['data'].title.hoge
+        /// "__obj__.title" -> "__obj__['__obj__'].title
         /// に変換してJSciprtでevalを行う。
         /// </summary>
         /// <param name="expression"></param>
         /// <param name="data"></param>
+        /// <remarks>内部変数として、「__obj__」を利用します。
+        /// 「__obj__」を変数として利用したい場合は、<code>__obj__['__obj__']</code>と記述してください。
+        /// ただし、変数名やプロパティ名として「__obj__」を利用することはオススメしません。
+        /// </remarks>
         /// <returns></returns>
         public static object GetValue(string expression, IDictionary<string, object> data)
         {
@@ -46,23 +50,17 @@ namespace Seasar.Fisshplate.Util
             {
                 return expression;
             }
-            //data['～']形式の場合
-            if (Regex.Match(expression.Trim(), @"^data\['\S+'\]").Success)
+            //__obj__['～']形式の場合、正しい形式なので何もしない。
+            if (Regex.Match(expression.Trim(), @"^__obj__\['\S+'\]").Success)
             {
                 return expression;
             }
-            // data.～の形式の場合
-            //Match mat = Regex.Match(expression, @"^data\.(\S[^\.\[\]]+)(\S*)");
-            //if (mat.Success)
-            //{
-            //    return "data['" + mat.Groups[1].Value + "']" + mat.Groups[2].Value;
-            //}
-            
-            // "data"以外の値の場合(変数一つか、最初が"."区切りか、"[" がある)
-            Match mat2 = Regex.Match(expression, @"^([^\s\.\[]+)((\.|\[).*)?");
+           
+            // 変数一つか、最初が"."区切り、もしくは"["(配列)の場合)
+            Match mat2 = Regex.Match(expression, @"^\s*([^\s\.\[]+)((\.|\[).*)?");
             if (mat2.Success)
             {
-                return "data['" + mat2.Groups[1].Value + "']" + mat2.Groups[2].Value;
+                return "__obj__['" + mat2.Groups[1].Value + "']" + mat2.Groups[2].Value;
             }
             throw new ApplicationException("JSciprtで解析出来ない式です。[" + expression + "]");
         }

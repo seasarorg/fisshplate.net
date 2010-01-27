@@ -56,7 +56,7 @@ namespace Seasar.Fisshplate.Test.Util
             Dictionary<string, object> hash = new Dictionary<string, object>();
             hash["out"] = outStr;
 
-            Assert.AreEqual<string>("Out", (string)JScriptUtil.Evaluate("data['out']", hash));
+            Assert.AreEqual<string>("Out", (string)JScriptUtil.Evaluate("__obj__['out']", hash));
         }
 
         [Test]
@@ -77,7 +77,7 @@ b'";
 
             hash["items"] = items;
 
-            Assert.AreEqual<int>(579, (int)JScriptUtil.Evaluate("data['items']['aaa'] + data['items']['bbb']", hash));
+            Assert.AreEqual<int>(579, (int)JScriptUtil.Evaluate("__obj__['items']['aaa'] + __obj__['items']['bbb']", hash));
         }
 
         [Test]
@@ -96,14 +96,14 @@ b'";
         {
             string value = "hoge";
 
-            Assert.AreEqual("hoge", JScriptUtil.Evaluate("data", value));
+            Assert.AreEqual("hoge", JScriptUtil.Evaluate("__obj__", value));
         }
 
         [Test]
         public void TestMethod()
         {
             HogeSample data = new HogeSample();
-            Assert.AreEqual<string>("hoge", (string)JScriptUtil.Evaluate("data.GetHoge()", data));
+            Assert.AreEqual<string>("hoge", (string)JScriptUtil.Evaluate("__obj__.GetHoge()", data));
         }
 
         [Test]
@@ -111,7 +111,7 @@ b'";
         {
             HogeSample data = new HogeSample();
             data.Hoge = "hhhh";
-            Assert.AreEqual<string>("hhhh", (string)JScriptUtil.Evaluate("data.Hoge", data));
+            Assert.AreEqual<string>("hhhh", (string)JScriptUtil.Evaluate("__obj__.Hoge", data));
         }
 
         [Test]
@@ -121,7 +121,7 @@ b'";
             data["hoge"] = "Hoge";
             try
             {
-                JScriptUtil.Evaluate("data['moge']", data);
+                JScriptUtil.Evaluate("__obj__['moge']", data);
             }
             catch (TargetInvocationException ex)
             {
@@ -147,10 +147,10 @@ b'";
 
             data["dataList"] = list;
 
-            Assert.AreEqual(2, JScriptUtil.Evaluate("data['dataList'].Count", data));
-            Assert.AreEqual("ほげ", JScriptUtil.Evaluate("data['dataList'][0]", data));
-            Assert.AreEqual(123, JScriptUtil.Evaluate("data['dataList'][1]", data));
-            Assert.AreEqual(2, JScriptUtil.Evaluate("data['dataList'][0].Length", data));
+            Assert.AreEqual(2, JScriptUtil.Evaluate("__obj__['dataList'].Count", data));
+            Assert.AreEqual("ほげ", JScriptUtil.Evaluate("__obj__['dataList'][0]", data));
+            Assert.AreEqual(123, JScriptUtil.Evaluate("__obj__['dataList'][1]", data));
+            Assert.AreEqual(2, JScriptUtil.Evaluate("__obj__['dataList'][0].Length", data));
         }
 
         [Test]
@@ -159,7 +159,7 @@ b'";
             Dictionary<string, object> data = new Dictionary<string, object>();
             data["hoge"] = "Hoge";
 
-            JScriptUtil.Evaluate("data['moge'] = \"Moge\"", data);
+            JScriptUtil.Evaluate("__obj__['moge'] = \"Moge\"", data);
             Assert.AreEqual<string>("Moge", (string)data["moge"]);
         }
 

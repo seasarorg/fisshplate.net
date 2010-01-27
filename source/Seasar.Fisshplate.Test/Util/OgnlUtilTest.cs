@@ -12,16 +12,25 @@ namespace Seasar.Fisshplate.Test.Util
         [Test]
         public void TestDeclareVar()
         {
-            string str = "name = data['hoge'] + (data.fuga - moge) && || sage";
+            string str = "name = __obj__['hoge'] + (__obj__.fuga - moge) && || sage";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("data['name'] = data['hoge'] + (data['data'].fuga - data['moge']) && || data['sage']", exp);
+            Assert.AreEqual("__obj__['name'] = __obj__['hoge'] + (__obj__['__obj__'].fuga - __obj__['moge']) && || __obj__['sage']", exp);
         }
 
+        [Test]
         public void Test変数名がdataの場合()
         {
             string str = "name = data + data.fuga";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("data['name'] = data['data'] + data['data'].fuga", exp);
+            Assert.AreEqual("__obj__['name'] = __obj__['data'] + __obj__['data'].fuga", exp);
+        }
+
+        [Test]
+        public void TestEnumerable系の使い方の場合()
+        {
+            string str = "name = hoge['moge'] + foo[123].age";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("__obj__['name'] = __obj__['hoge']['moge'] + __obj__['foo'][123].age", exp);
         }
     }
 }
