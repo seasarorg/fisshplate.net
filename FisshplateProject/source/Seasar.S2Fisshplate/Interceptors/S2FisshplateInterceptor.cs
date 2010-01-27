@@ -28,22 +28,22 @@ namespace Seasar.S2Fisshplate.Interceptors
             }
 
             object bean = args[0];
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data["bean"] = bean;
+            Dictionary<string, object> __obj__ = new Dictionary<string, object>();
+            __obj__["data"] = bean;
             HSSFWorkbook workbook = GetWorkbook(method);
 
             FPTemplate template = new FPTemplate();
 
-            return template.Process(workbook, data);
+            return template.Process(workbook, __obj__);
         }
 
         private HSSFWorkbook GetWorkbook(MethodBase method)
         {
             //属性の取得
-            object[] attributes = method.GetCustomAttributes(typeof(TemplateAttribute), false);
+            object[] attributes = method.GetCustomAttributes(typeof(FPTemplateAttribute), false);
             foreach (object o in attributes)
 	        {
-                TemplateAttribute attribute = (TemplateAttribute)o;
+                FPTemplateAttribute attribute = (FPTemplateAttribute)o;
 
                 // テンプレートのパスを取得する。
                 string path = attribute.Path;

@@ -20,7 +20,7 @@ namespace Seasar.Fisshplate.Util
                 class Evaluator
                 {
                     public static function Eval(expr : String, unsafe : boolean,
-                        data : Object) : Object
+                        __obj__ : Object) : Object
                     {
                         if (unsafe)
                         {

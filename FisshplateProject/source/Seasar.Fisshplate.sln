@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate", "Seasar.Fisshplate\Seasar.Fisshplate.csproj", "{38FF2779-9195-41B3-994E-6057AF3318C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.S2Fisshplate", "Seasar.S2Fisshplate\Seasar.S2Fisshplate.csproj", "{EC65268E-04D2-44BC-83B5-5B3C2EFFCD1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.Fisshplate.Test", "Seasar.Fisshplate.Test\Seasar.Fisshplate.Test.csproj", "{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seasar.S2Fisshplate.Test", "Seasar.S2Fisshplate.Test\Seasar.S2Fisshplate.Test.csproj", "{C347EF9D-09F8-453A-B4DA-FA4B49F5E348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB3DB4F1-9264-46CA-95F4-8E60D809C88E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C347EF9D-09F8-453A-B4DA-FA4B49F5E348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C347EF9D-09F8-453A-B4DA-FA4B49F5E348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C347EF9D-09F8-453A-B4DA-FA4B49F5E348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C347EF9D-09F8-453A-B4DA-FA4B49F5E348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
