@@ -15,13 +15,16 @@ namespace Seasar.Fisshplate.Core.Element
         private string _varName;
         private string _iteratorName;
         private string _indexName;
+        private int _cols;
         private int _startCellIndex;
         private RowWrapper _row;
 
-        public HorizontalIteratorBlock(string varName, string iteratorName, string indexName, CellWrapper cell)
+        public HorizontalIteratorBlock(string varName, string iteratorName, string indexName, 
+            int cols, CellWrapper cell)
         {
             this._varName = varName;
             this._iteratorName = iteratorName;
+            this._cols = cols;
             this._startCellIndex = cell.CellIndex;
             this._row = cell.Row;
             if (indexName == null || indexName.Trim() == string.Empty)
@@ -47,7 +50,7 @@ namespace Seasar.Fisshplate.Core.Element
             int index = 0;
             int startRowNum = context.CurrentRowNum;
             int startCell = _startCellIndex;
-            int maxCellNum = GetMaxCellElementSize() - _startCellIndex;
+            int maxCellNum = GetMaxCellNum();
 
             MergeNoIterationBlock(context);
 
@@ -58,19 +61,30 @@ namespace Seasar.Fisshplate.Core.Element
                 data[_indexName] = index;
                 index++;
                 context.MoveCurrentRowTo(startRowNum);
-                MergeBlock(context, startCell);
+                MergeBlock(context, startCell, maxCellNum);
                 startCell += maxCellNum;
             }
         }
 
-        private void MergeBlock(Seasar.Fisshplate.Context.FPContext context, int startCell)
+        private int GetMaxCellNum()
+        {
+            if (_cols < 0)
+            {
+                return GetMaxCellElementSize() - _startCellIndex;
+            }
+            return _cols;
+            
+        }
+
+        private void MergeBlock(Seasar.Fisshplate.Context.FPContext context, 
+            int startCell, int maxCellNum)
         {
             foreach (TemplateElement elem in _childList)
             {
                 if (elem is Row)
                 {
                     context.MoveCurrentCellTo(startCell);
-                    MergeRow(context, (Row)elem);
+                    MergeRow(context, (Row)elem, maxCellNum);
                 }
                 else
                 {
@@ -79,17 +93,24 @@ namespace Seasar.Fisshplate.Core.Element
             }
         }
 
-        private void MergeRow(Seasar.Fisshplate.Context.FPContext context, Row row)
+        private void MergeRow(Seasar.Fisshplate.Context.FPContext context, Row row,
+            int maxCellNum)
         {
             HSSFRow outRow = context.CurrentRow;
             outRow.Height = row.RowHeight;
             IDictionary<string, object> data = context.Data;
             data[FPConsts.RowNumberName] = context.CurrentRowNum + 1;
+
+            int maxCellIndex = _startCellIndex + maxCellNum - 1;
             for (int i = 0; i < row.CellElementList.Count; i++)
             {
                 if (i < _startCellIndex)
                 {
                     continue;
+                }
+                else if (i > maxCellIndex)
+                {
+                    break;
                 }
                 AdjustColumnWidth(context, (short)i);
                 TemplateElement elem = (TemplateElement)row.CellElementList[i];

@@ -9,7 +9,7 @@ using Seasar.Quill.Attrs;
 namespace Seasar.S2Fisshplate.Test.Interceptors
 {
     [Implementation]
-    [Aspect(typeof(Seasar.S2Fisshplate.Interceptors.S2FisshplateInterceptor))]
+    [Aspect(typeof(Seasar.S2Fisshplate.Interceptors.QuillFPInterceptor))]
     public interface HogeFpao
     {
         [FPTemplate("TemplateS2Fisshplate.xls")]

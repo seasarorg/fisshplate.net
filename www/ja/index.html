@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="fisshplate.net, Seasar, The Seasar Project, The Seasar Foundation, OSS, Open Source Software, Java, Framework" />
+<meta name="description" content="fisshplate.net" />
+<title>Fisshplate.net</title>
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="css/fisshplatenet.css" media="screen,projection" />
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<div id="header">
+
+<div class="line"><span class="hide">spacer</span></div>
+
+<div id="logo"><h2 id="h01" class="hide">The Seasar Foundation Project Site</h2><img src="http://www.seasar.org/images/seasar_logo_blue.gif" alt="The Seasar Project" width="390" height="180" /></div>
+
+<div id="tool">
+
+<h2><a href="http://search.seasar.org/">Site Search</a></h2>
+
+<form id="search" name="search" action="http://search.seasar.org/">
+<div>
+	<input id="search_phrase" type="text" name="phrase" size="20" />
+	<input type="hidden" name="perpage" value="30" />
+	<input type="hidden" name="enc" value="UTF-8" />
+	<input id="search_go" type="submit" value="Search" />
+</div>
+</form>
+
+<h2>Seasar Banner</h2>
+
+<p><a href="http://www.seasar.org/images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+
+</div>
+
+</div><!-- header -->
+
+
+<div id="contents_left">
+
+<h2>About</h2>
+<ul>
+	<li class="none"><a href="./index.html">Welcome</a></li>
+	<li class="none"><a href="./license.html">ライセンス</a></li>
+	<li class="none"><a href="./download.html">ダウンロード</a></li>
+	<li class="none"><a href="./library.html">依存ライブラリ</a></li>
+</ul>
+
+<h2>ドキュメント</h2>
+<ul>
+	<li class="none"><a href="./setup.html">セットアップ</a></li>
+	<li class="none"><a href="./template.html">テンプレート</a></li>
+	<li class="none"><a href="./output.html">ファイル出力</a></li>
+	<li class="none"><a href="./syntax.html">文法</a></li>
+	<li class="none"><a href="./customtag.html">独自タグ</a></li>
+	<li class="none"><a href="./withquill.html">Quillとの連携</a></li>
+</ul>
+
+<h2>APIドキュメント</h2>
+<ul>
+	<li class="none"><a href="./api/fisshplate/Index.html">Fisshplate.NET</a></li>
+	<li class="none"><a href="./api/s2fisshplate/Index.html">S2Fisshplate.NET</a></li>
+</ul>
+
+<h2>サポート</h2>
+<ul>
+	<li class="none"><a href="./index.html">FAQ</a></li>
+	<li class="none"><a href="./mailing.html">メーリングリスト</a></li>
+	<li class="none"><a href="./tracking.html">トラッキング</a></li>
+</ul>
+
+</div><!-- contents_left -->
+
+<div id="contents_center">
+
+<div id="article">
+
+<div class="section">
+<h2>Welcome</h2>
+
+<p>Fisshplate.NETは、Excelにテンプレート式を書くことで動的にデータが埋め込まれたExcelファイルを生成することが出来るライブラリです。</p>
+<p>Javaで作成された<a href="http://fisshplate.sandbox.seasar.org/">Fisshplate</a>をベースに.NETに移植したものです。</p>
+<p>Excel出力にはCOMを利用しておりません。
+この為、Excelのプロセスの解放忘れといった問題が発生しません。</p>
+<p>出力されるExcelのバージョンは「xls(97-2003)」形式となります。「xlsx(2007)」形式には対応しておりません。</p>
+
+<div class="section">
+<h3>最新版ダウンロード</h3>
+まだリリースされていません。
+<!--現在の最新版は<a href="#">Fisshplate.NET-0.1.0</a>となります。-->
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>概要</h3>
+<p>以下のようにExcelでテンプレートを作成します。</p>
+<img src="image/template1.jpg" />
+<p>作成したテンプレートファイルを読み込み、NPOIのHSSFWorkbookを生成・保存します。</p>
+<div class="source">
+<pre>// テンプレート出力で利用するデータクラス
+public class A
+{
+	public String Name { get; set; }
+	pulibc int Num { get; set; }
+	public DateTime Date { get; set; }
+}
+</pre>
+<pre><span class="titile">// "FPTemplate.xls" を読み込んで "out.xls" を出力するサンプル。</span>
+// データ作成
+IDictionary&lt;string, object&gt; data = new IDictionary&lt;string, object&gt;();
+data["title"] = "タイトルである";
+IList&lt;A&gt; aList = new List&lt;A&gt;()
+{
+	new A() { Name = "1行目", Num = 10, Date = DateTime.Now },
+	new A() { Name = "2行目", Num = 20, Date = DateTime.Now },
+	new A() { Name = "3行目", Num = 30, Date = DateTime.Now },
+	new A() { Name = "4行目", Num = 10, Date = DateTime.Now },
+	new A() { Name = "5行目", Num = 20, Date = DateTime.Now },
+	new A() { Name = "6行目", Num = 30, Date = DateTime.Now },
+};
+data["b"] = aList;
+
+HSSFWorkbook wb = null;
+FPTemplate template = new FPTemplate();
+using (Stream s = new FileStream("FPTemplate.xls", FileMode.Open, FileAccess.Read))
+{
+	wb = template.Process(s, data);
+}
+using (Stream fos = new FileOutputStream("out.xls"))
+{
+	wb.Write(fos);
+}
+</pre>
+</div>
+<p>out.xlsファイルには設定したデータが埋め込まれて出力されます。</p>
+<img src="image/out1.jpg" />
+<p>繰り返し、条件分岐などを反映したExcelを出力することが出来ます。
+テンプレートに設定した背景色、セルの結合、フォントなどの書式も反映されます。</p>
+
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>Java版との違い</h3>
+<p>ほとんどの機能はJava版と同じように利用出来ますが、バインド変数などの解決方法や依存ライブラリの関係で以下のような差異があります。</p>
+<ul>
+	<li>
+		プレビュー機能が未実装です。(将来的には対応する予定です)
+	</li>
+	<li>
+		式言語にJSciprt.NETを利用。
+	</li>
+	<li>
+		Mapの代わりにIDictionary。
+	</li>
+	<li>
+		引数のIDictionary変数名が「data」固定。
+		詳細は、<a href="template.html">テンプレート</a>のページで解説します。
+	</li>
+	<li>
+		プロパティやメソッド名の先頭が大文字。
+	</li>
+</ul>
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+</div><!-- article -->
+
+</div><!-- contents_center -->
+
+<div id="footer">
+<address>&copy; Copyright The Seasar Foundation and the others 2006, all rights reserved.</address>
+<div class="line"><span class="hide">spacer</span></div>
+</div><!-- footer -->
+
+</div><!-- wrapper -->
+
+</body>
+</html>
+
