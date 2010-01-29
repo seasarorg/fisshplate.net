@@ -27,16 +27,18 @@ namespace Seasar.Fisshplate.Test.Template
                 {
                     _template = new FPTemplate();
                     Dictionary<string, object> data = new Dictionary<string, object>();
-                    data.Add("title", "タイトルである");
-                    List<A> aList = new List<A>();
-                    aList.Add(new A("1行目", 10, DateTime.Now));
-                    aList.Add(new A("2行目", 20, DateTime.Now));
-                    aList.Add(new A("3行目", 30, DateTime.Now));
-                    aList.Add(new A("4行目", 10, DateTime.Now));
-                    aList.Add(new A("5行目", 20, DateTime.Now));
-                    aList.Add(new A("6行目", 30, DateTime.Now));
+                    data["title"] = "タイトルである";
+                    List<A> aList = new List<A>()
+                    {
+	                    new A() { Name = "1行目", Num = 10, Date = DateTime.Now },
+	                    new A() { Name = "2行目", Num = 20, Date = DateTime.Now },
+	                    new A() { Name = "3行目", Num = 30, Date = DateTime.Now },
+	                    new A() { Name = "4行目", Num = 10, Date = DateTime.Now },
+	                    new A() { Name = "5行目", Num = 20, Date = DateTime.Now },
+	                    new A() { Name = "6行目", Num = 30, Date = DateTime.Now },
+                    };
 
-                    data.Add("b", aList);
+                    data["b"] = aList;
 
                     wb = _template.Process(fs, data);
 
@@ -305,6 +307,8 @@ namespace Seasar.Fisshplate.Test.Template
             public string Name { get; set; }
             public int Num { get; set; }
             public DateTime Date { get; set; }
+
+            public A() { }
 
             public A(string name, int num, DateTime date)
             {

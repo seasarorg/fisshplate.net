@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attr\FPTemplateAttribute.cs" />
-    <Compile Include="Interceptors\S2FisshplateInterceptor.cs" />
+    <Compile Include="Interceptors\QuillFPInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="RunTest"
+ xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!-- Gallioタスクの読み込み -->
+  <UsingTask AssemblyFile="$(GALIOHOME)\bin\Gallio.MsBuildTasks.dll"
+             TaskName="Gallio" />
+
+  <!-- テスト対象アセンブリの設定 -->
+  <ItemGroup>
+    <TestFile Include="Seasar.Fisshplate.Test\bin\Debug\Seasar.Fisshplate.Test.dll" />
+  </ItemGroup>
+
+
+  <!-- RunTestターゲット -->
+  <Target Name="RunTest">
+    <Gallio Files="@(TestFile)" ReportTypes="xml;html" IgnoreFailures="true"
+    	ReportNameFormat="test-report">
+      <!-- テスト結果をRetCodeプロパティにセット -->
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode"/>
+    </Gallio>
+    <!-- エラーがあればメッセージを出力 -->
+    <Error Condition="'$(ExitCode)' != 0" Text="テストに失敗しました" />
+  </Target>
+
+</Project>

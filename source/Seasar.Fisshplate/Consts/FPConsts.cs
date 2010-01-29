@@ -57,6 +57,8 @@ namespace Seasar.Fisshplate.Consts
 
         public const string MessageIdPictureMergeError = "EFP00014";
 
+        public const string MessageIdHorizontalIteratorInvalidWidth = "EFP00015";
+
         public const string RegexBindVarStart = @"\$\{";
         public const string RegexBindVarEnd = @"\}";
         public const string RegexBindVar = RegexBindVarStart + "[^" + RegexBindVarStart + RegexBindVarEnd + "]" + "+" + RegexBindVarEnd;

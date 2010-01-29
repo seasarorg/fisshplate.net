@@ -10,7 +10,7 @@ using Seasar.Fisshplate.Template;
 
 namespace Seasar.S2Fisshplate.Interceptors
 {
-    public class S2FisshplateInterceptor : AbstractInterceptor
+    public class QuillFPInterceptor : AbstractInterceptor
     {
 
         public override object Invoke(Seasar.Framework.Aop.IMethodInvocation invocation)
