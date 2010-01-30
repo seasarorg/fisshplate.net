@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="keywords" content="fisshplate.net, Seasar, The Seasar Project, The Seasar Foundation, OSS, Open Source Software, Java, Framework" />
 <meta name="description" content="fisshplate.net" />
-<title>Fisshplate.net ダウンロード</title>
+<title>Fisshplate.net Quillとの連携</title>
 <link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/main.css" media="screen,projection" />
 <link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/print.css" media="print" />
 <link rel="stylesheet" type="text/css" href="css/fisshplatenet.css" media="screen,projection" />
@@ -73,9 +73,9 @@
 
 <h2>サポート</h2>
 <ul>
-	<li class="none"><a href="./index.html">FAQ</a></li>
-	<li class="none"><a href="./mailing.html">メーリングリスト</a></li>
-	<li class="none"><a href="./tracking.html">トラッキング</a></li>
+	<li class="none"><a href="./faq.html">FAQ</a></li>
+	<li class="none"><a href="https://ml.seasar.org/mailman/listinfo/seasar-dotnet">メーリングリスト</a></li>
+	<li class="none"><a href="https://www.seasar.org/issues/browse/FISSHPLATENET">トラッキング</a></li>
 </ul>
 
 </div><!-- contents_left -->
@@ -85,22 +85,113 @@
 <div id="article">
 
 <div class="section">
-<h2>最新版ダウンロード</h2>
-
-<div class="section">
-<h3>TODO</h3>
-</div><!-- h3.section -->
-
+<h2>S2Fisshplate.NETとは</h2>
+<p>Fisshplate.NETは、S2Container.NETやQuillには依存しておらず、汎用的に利用することができます。</p>
+<p>S2Fisshplate.NETを使うことによって、QuillとS2Fisshaplate.NETを連携させ、インターフェースを定義するだけでFisshplate.NETの機能を使うことが可能になります。</p>
+<p>0.1.0 ではQuillとの連携機能のみ提供しております。</p>
 </div><!-- h2.section -->
 
 <div class="section">
-<h2>過去のバージョン</h2>
+<h2>Quillとの連携方法</h2>
+<p><a href="http://s2container.net.seasar.org/ja/quill.html">Quillのセットアップ</a>は事前に行っておいてください。</p>
+<p>また、<a href="setup.html">S2Fisshplate.NETのセットアップ</a>を行っておきます。</p>
+
 <div class="section">
-<h3>TODO</h3>
+<h3>Dtoの作成</h3>
+<p>まず、テンプレートに埋め込むDtoを作ります。</p>
+<ul>
+	<li>プロパティは必ずpublicにしてください。</p>
+</ul>
+<div class="source"><pre>
+public class TestFisshplateDto
+{
+  public string Title { get; set; }
+  public List&lt;TestItem&gt; ItemList { get; set; }
+}
+</pre></div>
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>インターフェースの定義</h3>
+<p>次にインターフェースを定義します。</p>
+<ul>
+	<li>
+		インターフェースには次の属性をつけて下さい。
+		<ul>
+			<li>[Implementation]</li>
+			<li>[Aspect(typeof(Seasar.S2Fisshplate.Interceptors.FPQuillInterceptor))]</li>
+		</ul>
+	</li>
+	<li>メソッドの戻り値は必ず「HSSFWorkbook」にしてください。
+	<li>引数は1つにして下さい。引数が複数の場合、第1引数のみが埋め込み用データとして扱われ、他は無視されます。</li>
+	<li>
+		メソッドには次の属性をつけて下さい。パラメータには、テンプレートファイルへのパスを記述します。
+		<ul>
+			<li>[[FPTemplate(string Path)]]</li>
+		</ul>
+	</li>
+</ul>
+<div class="source"><pre>
+[Implementation]
+[Aspect(typeof(Seasar.S2Fisshplate.Interceptors.FPQuillInterceptor))]
+public interface TestFisshplate
+{
+  [[FPTemplate(@"Template\FPSample.xls")]]
+  HSSFWorkbook GetTestWb(TestFisshplateDto dto);
+}
+</pre></div>
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>テンプレートファイルの作成</h3>
+<p>テンプレートファイルを作成します。</p>
+<ul>
+	<li>ファイル名は、FPTemplate属性に指定したファイル名で作成します。</li>
+	<li>実行ファイルから参照できる場所に配置してください。
+		<ul>
+			<li>VisualStudioの場合、テンプレートファイルのプロパティの「出力ディレクトリにコピー」を「常にコピーする」「新しい場合はコピーする」にすることで読み込まれます。</li>
+		</ul>
+	</li>
+	<li>引数のDtoのプロパティは「data」という名前で参照できます。
+		<ul>
+			<li>この場合、「TestFisshplateDto.Title」は「${data.Title}」で参照されます。</li>
+		</ul>
+	</li>
+</ul>
+TODO:ここにイメージ画像
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>ファイルの出力</h3>
+<p>呼び出し側ではこのようになります。テンプレートファイルの読み込み、解析、ファイル出力などの処理が自動で実行され、出力ファイルが戻されます。</p>
+<div class="source"><pre>
+protected TestFisshplate fisshplate; // Quillでインジェクションされます。
+
+public void Hoge()
+{
+  // QuillInjector.GetInstance().Inject(this);
+  
+  TestFisshplateDto dto =new TestFisshplateDto();
+  dto.Title = "テストです";
+  
+  List&lt;TestItem&gt; itemList = new List&lt;TestItem&gt;();
+  TestItem item = new TestItem();
+  item.Date = DateTime.Now;
+  item.Name = "1行目";
+  item.Num = 10;
+  itemList.Add(item);
+  // ・・以下、必要な数だけ明細行を追加
+  dto.ItemList = itemList;
+  HSSFWorkbook wb = fisshplate.GetTestWb(dto);
+}
+</pre></div>
+<p>このようにして、データ埋め込み済みのHSSFWorkbookを取得する事が出来ます。</p>
+<ul>
+	<li>DIの機能についての詳細は、<a href="http://s2container.net.seasar.org/ja/quill.html">Quillで簡単DI+AOP</a>を参照してください。</li>
+</ul>
 </div><!-- h3.section -->
 
 </div><!-- h2.section -->
-
 
 </div><!-- article -->
 
