@@ -10,7 +10,7 @@ using Seasar.S2Fisshplate.Sample.Dto;
 namespace Seasar.S2Fisshplate.Sample.Fpao
 {
     [Implementation]
-    [Aspect(typeof(QuillFPInterceptor))]
+    [Aspect(typeof(FPQuillInterceptor))]
     public interface SampleFpao
     {
         [FPTemplate(@"Template\FPSample.xls")]

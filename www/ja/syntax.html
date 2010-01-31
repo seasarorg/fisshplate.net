@@ -95,7 +95,7 @@ TODO:全部見直すこと！
 	<li><a href="#pageBreak">pageBreak</a></li>
 	<li><a href="#pageHeaderStart">pageHeaderStart</a></li>
 	<li><a href="#pageFooterStart">pageFooterStart</a></li>
-	<li><a href="#var">スクリプト実行</a></li>
+	<li><a href="#script">スクリプト実行</a></li>
 	<li><a href="#suspend">変数の評価の遅延</a></li>
 	<li><a href="#link">ハイパーリンク埋め込み</a></li>
 	<li><a href="#picture">画像埋め込み</a></li>
@@ -112,186 +112,234 @@ TODO:全部見直すこと！
 </ul>
 </div><!-- h2.section -->
 
-<div class="section"><h2><a name="foreach">foreach</a></h2>
+<div class="section">
+<h2><a name="foreach">foreach</a></h2>
 <p>取得したデータの一覧をExcelに出力する場合などに使います。ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
+
 <div class="section"><h3>構文</h3>
 <div class="source"><pre>#foreach var : list index=indexname max=maxrowcount
 [繰り返す行]
 #end
-
-</pre>
-</div>
-<dl><dt>list</dt>
-<dd>要素の集合データの名前です。データはListと配列をサポートしています。</dd>
-<dt>var</dt>
-<dd>上記listの各要素を受け取る変数名です。</dd>
-<dt>indexname</dt>
-<dd>ループ内で参照する、ループインデックス名です。0スタートになります。これは必須ではありません。 指定しない場合、「index」で参照する事が出来ます。</dd>
-<dt>maxrowcount</dt>
-<dd>ループの最大回数です。データの件数がこれに満たない場合、満たすまで空データを埋め込んだ行を出力します。 これは必須ではありません。指定しない場合はデータ件数通りの行数を出力します。</dd>
-
+</pre></div>
+<dl>
+	<dt>list</dt>
+	<dd>要素の集合データの名前です。データはListと配列をサポートしています。</dd>
+	<dt>var</dt>
+	<dd>上記listの各要素を受け取る変数名です。</dd>
+	<dt>indexname</dt>
+	<dd>ループ内で参照する、ループインデックス名です。0スタートになります。
+	これは必須ではありません。 指定しない場合、「index」で参照する事が出来ます。</dd>
+	<dt>maxrowcount</dt>
+	<dd>ループの最大回数です。データの件数がこれに満たない場合、満たすまで空データを埋め込んだ行を出力します。 
+	これは必須ではありません。指定しない場合はデータ件数通りの行数を出力します。</dd>
 </dl>
-</div>
-<div class="section"><h3>例</h3>
-<div class="section"><h4>基本的な例</h4>
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>例</h3>
+
+<div class="section">
+<h4>基本的な例</h4>
 <p>テンプレートを作ります。</p>
-<img src="images/foreach01.png" /><p>Java側でデータを設定します。</p>
+<img src="image/foreach01.jpg" /><p>.NET側でデータを設定します。</p>
 <div class="source"><pre>public class Foo{
-    private String name;
-    private int num;
-    public Foo(String name, int num){
-        this.name = name;
-        this.num = num;
-    }
-    (setter、getter省略)
+    public string Name { get; set; };
+    public int Num { get; set; };
 }
-</pre>
-</div>
-<div class="source"><pre>Map map = new HashMap();
-List list = new ArrayList();
-list.add(new Foo(&quot;1行目&quot;,10));
-list.add(new Foo(&quot;2行目&quot;,20));
-list.add(new Foo(&quot;3行目&quot;,30));
-list.add(new Foo(&quot;4行目&quot;,10));
-list.add(new Foo(&quot;5行目&quot;,20));
-list.add(new Foo(&quot;6行目&quot;,30));
-map.put(&quot;fooList&quot;, list);
+</pre></div>
+<div class="source"><pre>IDictionary&lt;string, object&gt; data = new Dictionary&lt;string, object&gt;();
+IList&lt;Foo&gt; list = new List&lt;Foo&gt;();
+list.Add(new Foo(){ Name="1行目", Num=10 } );
+list.Add(new Foo(){ Name="2行目", Num=20 } );
+list.Add(new Foo(){ Name="3行目", Num=30 } );
+list.Add(new Foo(){ Name="1行目", Num=10 } );
+list.Add(new Foo(){ Name="2行目", Num=20 } );
+list.Add(new Foo(){ Name="3行目", Num=30 } );
+data["fooList"] = list;
+</pre></div>
 
-</pre>
-</div>
 <p>この場合、出力ファイルは以下の様になります。</p>
-<img src="images/foreach02.png" /></div>
-<div class="section"><h4>ループインデックスの省略</h4>
-<p>「index=idx」を省略する事が出来ます。その場合、ループインデックスは「index」という名前で参照します。</p>
-<img src="images/foreach03.png" /><p>出力結果は同じです。</p>
-<div class="section"><h5>ループのネストと注意</h5>
-<p>ループはネストする事が出来ます。その場合、ループ内でループインデックスを参照する場合は、必ず各ループで「index=」を指定して下さい。 指定しないと、ネストしたループでインデックスが共有されてしまうからです。</p>
-<p>ループインデックスを参照する必要がない場合は、省略しても構いません。</p>
+<img src="image/foreach02.jpg" />
+</div><!-- h4.section -->
 
-</div>
-</div>
-<div class="section"><h4>最大出力行数の指定</h4>
-<p>「max=maxrowcount」を書くと、データ件数が指定した行数に満たない場合、空行を出力する事が出来ます。 罫線など書式をともなった行数固定の表などを出力するのに有効です。</p>
-<img src="images/foreach04.png" /><p>テンプレートにこう書いた場合、出力されるファイルは以下の様になります。</p>
-<img src="images/foreach05.png" /><div class="section"><h5>最大出力行数と改ページの連携</h5>
+<div class="section">
+<h4>ループインデックスの省略</h4>
+<p>「index=idx」を省略する事が出来ます。その場合、ループインデックスは「index」という名前で参照します。</p>
+<img src="image/foreach03.jpg" />
+<p>出力結果は同じです。</p>
+
+<div class="section">
+<h5>ループのネストと注意</h5>
+<p>ループはネストする事が出来ます。その場合、ループ内でループインデックスを参照する場合は、必ず各ループで「index=」を指定して下さい。 
+指定しないと、ネストしたループでインデックスが共有されてしまうからです。</p>
+<p>ループインデックスを参照する必要がない場合は、省略しても構いません。</p>
+</div><!-- h5.section -->
+
+</div><!-- h4.section -->
+
+<div class="section">
+<h4>最大出力行数の指定</h4>
+<p>「max=maxrowcount」を書くと、データ件数が指定した行数に満たない場合、空行を出力する事が出来ます。 
+罫線など書式をともなった行数固定の表などを出力するのに有効です。</p>
+<img src="image/foreach04.jpg" />
+<p>テンプレートにこう書いた場合、出力されるファイルは以下の様になります。</p>
+<img src="image/foreach05.jpg" />
+
+<div class="section">
+<h5>最大出力行数と改ページの連携</h5>
 <p>「max=maxrowcount」を指定し、「#<a href="#pageBreak">pageBreak</a>」を書いて改ページを指定した場合、 最大行数はページ単位で判定されます。</p>
 <p>例えば、以下のようなテンプレートを書きます。</p>
-<img src="images/foreach06.png" /><p>「max=10」を指定すると同時に、10行ごとに改ページするようになっています。</p>
-
-<p>データが12件あった場合、出力されるファイルは以下のようになります。</p>
-<img src="images/foreach07.png" /><p>データ件数が12件で、本来ならば「max=10」を超えているので空行は出力されませんが、 10行ごとに改ページしているため、2ページ目の件数は2行と判断され、8行の空行が出力されています。</p>
+<img src="image/foreach06.jpg" />
+<p>「max=5」を指定すると同時に、5行ごとに改ページするようになっています。</p>
+<p>データが6件あった場合、出力されるファイルは以下のようになります。</p>
+<img src="image/foreach07.jpg" />
+<p>データ件数が6件で、本来ならば「max=5」を超えているので空行は出力されませんが、 5行ごとに改ページしているため、2ページ目の件数は2行と判断され、4行の空行が出力されています。</p>
 <p>なお、この連携は「#<a href="#pageBreak">pageBreak</a>」を用いた改ページのみに対応しており、 EXCELのページ設定による改ページとは連携しません。</p>
-</div>
-</div>
-</div>
-</div>
-<div class="section"><h2><a name="hforeach">hforeach</a></h2>
-<p>取得したデータの一覧をExcelに出力する場合などに使います。<a href="#foreach">foreach</a>と違い、横に展開します。 ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
+</div><!-- h5.section -->
+
+</div><!-- h4.section -->
+
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="hforeach">hforeach</a></h2>
+<p>取得したデータの一覧をExcelに出力する場合などに使います。
+<a href="#foreach">foreach</a>と違い、横に展開します。 
+ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
 
 <div class="section"><h3>構文</h3>
-<div class="source"><pre>#hforeach var : list index=indexname
+<div class="source"><pre>#hforeach var : list index=indexname cols=colcount
 [繰り返す行]
 #end
-</pre>
-</div>
-<dl><dt>list</dt>
-<dd>要素の集合データの名前です。データはListと配列をサポートしています。</dd>
-<dt>var</dt>
-<dd>上記listの各要素を受け取る変数名です。</dd>
-<dt>indexname</dt>
-<dd>ループ内で参照する、ループインデックス名です。0スタートになります。これは必須ではありません。 指定しない場合、「index」で参照する事が出来ます。</dd>
-
+</pre></div>
+<dl>
+	<dt>list</dt>
+	<dd>要素の集合データの名前です。データはListと配列をサポートしています。</dd>
+	<dt>var</dt>
+	<dd>上記listの各要素を受け取る変数名です。</dd>
+	<dt>indexname</dt>
+	<dd>ループ内で参照する、ループインデックス名です。0スタートになります。
+	これは必須ではありません。 指定しない場合、「index」で参照する事が出来ます。</dd>
+	<dt>colcount</dt>
+	<dd>繰り返しの対象となる列数を指定します。
+	これは必須ではありません。指定しない場合、ブロック内の最大列数までが繰り返しの対象となります。</dd>
 </dl>
 </div>
 <div class="section"><h3>例</h3>
 <p>テンプレートを作ります</p>
-<img src="images/hforeach01.png" /><p>「#hforeach」を任意の列に書きます。その列から右の列がまとめて横に展開されます。 上の例の場合、「金額一覧」と「月」の列はタグより左にあるため、繰り返されません。</p>
-<p>Java側でデータを用意します。</p>
-<div class="source"><pre>public class Data{
-    private int amountA;
-    private int amountB;
-    private int amountC;
-    private int amountD;
-    private int month;
-
-    (Setter,Getter略)
+<img src="image/hforeach01.jpg" />
+<p>「#hforeach」を任意の列に書きます。その列から右の列がまとめて横に展開されます。 
+上の例の場合、「金額一覧」と「月」の列はタグより左にあるため、繰り返されません。</p>
+<p>.NET側でデータを用意します。</p>
+<div class="source"><pre>public class Data
+{
+    public int AmountA { get; set; }
+    public int AmountB { get; set; }
+    public int AmountC { get; set; }
+    public int AmountD { get; set; }
+    public int Month { get; set; }
 }
-</pre>
-</div>
-<div class="source"><pre>List list = new ArrayList();
-list.add(new Data(){{setMonth(1);setAmountA(10);setAmountB(20);setAmountC(30);setAmountD(40);}});
-list.add(new Data(){{setMonth(2);setAmountA(12);setAmountB(21);setAmountC(31);setAmountD(50);}});
-list.add(new Data(){{setMonth(3);setAmountA(14);setAmountB(19);setAmountC(32);setAmountD(60);}});
-list.add(new Data(){{setMonth(4);setAmountA(16);setAmountB(18);setAmountC(33);setAmountD(70);}});
-Map data = new HashMap();
-data.put(&quot;list&quot;, list);
-</pre>
-
-</div>
+</pre></div>
+<div class="source"><pre>IList&lt;Data&gt; list = new List&lt;Data&gt;();
+list.Add(new Data(){ Month=1, AmountA=10, AmountB=20, AmountC=30, AmountD=40 });
+list.Add(new Data(){ Month=2, AmountA=12, AmountB=21, AmountC=31, AmountD=50 });
+list.Add(new Data(){ Month=3, AmountA=14, AmountB=19, AmountC=32, AmountD=60 });
+list.Add(new Data(){ Month=4, AmountA=16, AmountB=18, AmountC=33, AmountD=70 });
+IDictionary&lt;string, object&gt; data = new Dictionary&lt;string, object&gt;();
+data["list"] = list;
+</pre></div>
 <p>この場合、出力ファイルは以下のようになります。</p>
-<img src="images/hforeach02.png" /></div>
-</div>
-<div class="section"><h2><a name="while">while</a></h2>
+<img src="image/hforeach02.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="while">while</a></h2>
 <p>配列やリストなどのイテレータを使わないで、任意の条件でループを回したい場合は、「#while」を使います。</p>
+
 <div class="section"><h3>構文</h3>
 <div class="source"><pre>#while [条件式]
 [出力する行]
-#end
-</pre>
-</div>
+#end</pre></div>
 <p>条件式がtrueである間、ループが継続されます。条件式はOGNLで評価されます。</p>
-</div>
+</div><!-- h3.section -->
 
 <div class="section"><h3>例</h3>
-<p>テンプレートを作ります。「#var」と「#exec」を併用します（これらについては<a href="#スクリプト実行">スクリプト実行</a>も参照して下さい）。</p>
-<img src="images/while01.png" /><p>このテンプレートは特にデータを必要としないので、データなしでそのまま出力します。結果は以下になります。</p>
-<img src="images/while02.png" /></div>
-</div>
-<div class="section"><h2><a name="if">if</a></h2>
-<p>ある条件によって、行の出力をする場合に使います。ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
-<div class="section"><h3>構文</h3>
+<p>テンプレートを作ります。
+「#var」と「#exec」を併用します（これらについては<a href="#script">スクリプト実行</a>も参照して下さい）。</p>
+<img src="image/while01.jpg" />
+<p>このテンプレートは特にデータを必要としないので、データなしでそのまま出力します。結果は以下になります。</p>
+<img src="image/while02.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="if">if</a></h2>
+<p>ある条件によって、行の出力をする場合に使います。
+ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
+
+<div class="section">
+<h3>構文</h3>
 <div class="source"><pre>#if [条件式]
 [出力する行]
 #else if [条件式]
 [出力する行]
 #else
 [出力する行]
-#end
-
-</pre>
-</div>
+#end</pre></div>
 <p>条件式はOGNLで評価されます。条件式は「#if (hoge == 0)」のように、カッコで括っても構いません。「#else if」と「#else」は任意です。</p>
-</div>
-<div class="section"><h3>例</h3>
-<p>テンプレートを作ります。<a href="#foreach">foreach</a>と併用してみます。</p>
-<img src="images/if01.png" /><p>ループの中で、インデックスが奇数の場合、背景色を水色にかえて、縞模様で出力するようにしています。</p>
-<p><a href="#foreach">foreach</a>の例と同じデータを埋め込むと出力結果はこうなります。</p>
-<img src="images/if02.png" /><p>また、「#else if」を使って、下記のようなテンプレートを作った場合は</p>
+</div><!-- h3.section -->
 
-<img src="images/if03.png" /><p>同データでの出力結果はこの様になります。</p>
-<img src="images/if04.png" /></div>
-</div>
-<div class="section"><h2><a name="pageBreak">pageBreak</a></h2>
+<div class="section">
+<h3>例</h3>
+<p>テンプレートを作ります。<a href="#foreach">foreach</a>と併用してみます。</p>
+<img src="image/if01.jpg" />
+<p>ループの中で、インデックスが奇数の場合、背景色を水色にかえて、縞模様で出力するようにしています。</p>
+<p><a href="#foreach">foreach</a>の例と同じデータを埋め込むと出力結果はこうなります。</p>
+<img src="image/if02.jpg" />
+<p>また、「#else if」を使って、下記のようなテンプレートを作った場合は</p>
+<img src="image/if03.jpg" />
+<p>同データでの出力結果はこの様になります。</p>
+<img src="image/if03.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="pageBreak">pageBreak</a></h2>
 <p>この位置に改ページを挿入します。「#pageHeader」か「#pageFooter」が指定されている場合は、それぞれを出力します。</p>
-<div class="section"><h3>例</h3>
+
+<div class="section">
+<h3>例</h3>
 <p>ここでは、後述する<a href="#pageHeaderStart">pageHeaderStart</a>と<a href="#pageFooterStart">pageFooterStart</a>と合わせて使用してみます。</p>
 <p>テンプレートにこのように記述するとします。</p>
-
-<img src="images/pagebreak01.png" /><p>4行ごとに改ページを強制的に挿入するようになっており、ヘッダとフッタを指定してあります。</p>
+<img src="image/pagebreak01.jpg" />
+<p>4行ごとに改ページを強制的に挿入するようになっており、ヘッダとフッタを指定してあります。</p>
 <p>データを埋め込むとこうなります。</p>
-<img src="images/pagebreak02.png" /></div>
-</div>
-<div class="section"><h2><a name="pageHeaderStart">pageHeaderStart</a></h2>
-<p>「#pageBreak」により改ページが挿入された際に、ヘッダとして出力されるブロックを指定します。ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
-<p>EXCELの印刷設定により改ページした場合には出力されません。また、ここでのヘッダとは通常のセルの事ですので、EXCELの印刷設定でのヘッダ設定とは関係りません。</p>
-<div class="section"><h3>構文</h3>
+<img src="image/pagebreak02.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="pageHeaderStart">pageHeaderStart</a></h2>
+<p>「#pageBreak」により改ページが挿入された際に、ヘッダとして出力されるブロックを指定します。
+ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
+<p>EXCELの印刷設定により改ページした場合には出力されません。
+また、ここでのヘッダとは通常のセルの事ですので、EXCELの印刷設定でのヘッダ設定とは関係りません。</p>
+
+<div class="section">
+<h3>構文</h3>
 <div class="source"><pre>#pageHeaderStart
 [出力する行]
 #end
-</pre>
-</div>
-
-<p>ヘッダは1つのシートに1つだけ指定する事が出来ます。ある条件でヘッダの内容を変えたい場合は、ブロック内で<a href="#if">if</a>を使って切り替えます。</p>
+</pre></div>
+<p>ヘッダは1つのシートに1つだけ指定する事が出来ます。
+ある条件でヘッダの内容を変えたい場合は、ブロック内で<a href="#if">if</a>を使って切り替えます。</p>
 <p>例えば、偶数ページと奇数ページでヘッダを切り替える場合は下記のように記述します。</p>
 <div class="source"><pre>#pageHeaderStart
 #if(page.pagenum%2 == 0)
@@ -299,116 +347,143 @@ data.put(&quot;list&quot;, list);
 #else
 [偶数ページに出力する行]
 #end
-#end
-</pre>
-</div>
-</div>
-</div>
-<div class="section"><h2><a name="pageFooterStart">pageFooterStart</a></h2>
-<p>「#pageBreak」により改ページが挿入された際に、フッタとして出力されるブロックを指定します。ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
-<p>EXCELの印刷設定により改ページした場合には出力されません。また、ここでのフッタとは通常のセルの事ですので、EXCELの印刷設定でのフッタ設定とは関係ありません。</p>
+#end</pre></div>
+</div><!-- h3.section -->
 
-<div class="section"><h3>構文</h3>
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="pageFooterStart">pageFooterStart</a></h2>
+<p>「#pageBreak」により改ページが挿入された際に、フッタとして出力されるブロックを指定します。
+ブロック要素なので、必ず「#end」で閉じる必要があります。</p>
+<p>EXCELの印刷設定により改ページした場合には出力されません。
+また、ここでのフッタとは通常のセルの事ですので、EXCELの印刷設定でのフッタ設定とは関係ありません。</p>
+
+<div class="section">
+<h3>構文</h3>
 <div class="source"><pre>#pageFooterStart
 [出力する行]
 #end
-</pre>
-</div>
+</pre></div>
 <p>フッタは1つのシートに1つだけ指定する事が出来ます。ある条件でフッタの内容を変えたい場合は、<a href="#pageHeaderStart">pageHeaderStart</a>と同様に、<a href="#if">if</a>で切り替えます。 詳細は<a href="#pageHeaderStart">pageHeaderStart</a>を参照して下さい。</p>
-</div>
-</div>
-<div class="section"><h2><a name="スクリプト実行">スクリプト実行</a></h2>
+</div><!-- h3.section -->
 
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="script">スクリプト実行</a></h2>
 <p>テンプレート上で、変数を宣言したり、OGNLスクリプトを書く事が出来ます。</p>
-<div class="section"><h3>変数宣言</h3>
+
+<div class="section">
+<h3>変数宣言</h3>
 <p>変数宣言には、「#var」を使います。</p>
 <div class="source"><pre>#var hoge, foo, bar
-</pre>
-</div>
+</pre></div>
 <p>カンマで区切る事で複数の変数を宣言出来ます。</p>
 <p>また、宣言と同時に初期値を指定する事も出来ます。</p>
 <div class="source"><pre>#var hoge, foo=0, bar = 'initialValue'
-</pre>
-</div>
-<p>指定しない場合は、初期値は空文字列になります。 上記の例ですと、「hoge」は空文字列、「foo」は整数「0」、barは文字列「initialValue」に設定されます。</p>
+</pre></div>
+<p>指定しない場合は、初期値は空文字列になります。 
+上記の例ですと、「hoge」は空文字列、「foo」は整数「0」、barは文字列「initialValue」に設定されます。</p>
+</div><!-- h3.section -->
 
-</div>
-<div class="section"><h3>実行</h3>
+<div class="section">
+<h3>実行</h3>
 <p>実行したいOGNLスクリプトを書くには、「#exec」を使います。</p>
 <div class="source"><pre>#exec hoge = foo
-</pre>
-</div>
+</pre></div>
 <p>上記は、変数hogeにfooを代入しています。OGNLについては<a class="externalLink" href="http://s2container.seasar.org/2.4/ja/ognl.html">こちら</a>が参考になります。</p>
-</div>
-<div class="section"><h3>例</h3>
-<p>ここでは、ループの中である値が変わった時に、ヘッダとフッタを出力する例を挙げます。</p>
+</div><!-- h3.section -->
 
+<div class="section">
+<h3>例</h3>
+<p>ここでは、ループの中である値が変わった時に、ヘッダとフッタを出力する例を挙げます。</p>
 <p>テンプレートはこのようになります。</p>
-<img src="images/exec01.png" /><p>#varを使い、変数を宣言しています。「total」は、宣言と同時に整数「0」で初期化しています。 他の変数は初期化していないので、初期値は空文字列となります。</p>
+<img src="image/exec01.jpg" />
+<p>#varを使い、変数を宣言しています。「total」は、宣言と同時に整数「0」で初期化しています。 
+他の変数は初期化していないので、初期値は空文字列となります。</p>
 <p>#execを使い、変数prevKeyにitem.keyの値を代入し、保存しています。</p>
 <p>前回の値であるprevKeyと、item.keyが違った場合、ヘッダを出力しています。</p>
-<p>フッタの場合は少し工夫が要ります。ここでは、itemListはjava.util.Listのインスタンスとします。配列の場合は異なってきますのでご注意下さい。</p>
+<p>フッタの場合は少し工夫が要ります。ここでは、itemListはjava.util.Listのインスタンスとします。
+配列の場合は異なってきますのでご注意下さい。</p>
 <p>ループインデックスに1を足した値と、itemList#size()が同じである場合は、最後の行なのでフッタを出力します。</p>
-<p>そうでない場合、次回の値を取得する必要があります。ここでは、itemList#get(index +1).keyで取得し、prevKeyと比較して、違っていればフッタを出力します。</p>
-<p>またitemListの行を出力するたびに、item.quantityをtotalに加算し、合計を求めて、フッタ内で出力しています。その後再度totalを「0」に初期化する事で、 キーブレイクごとの合計を表示するようにしています。</p>
-
+<p>そうでない場合、次回の値を取得する必要があります。
+ここでは、itemList#get(index +1).keyで取得し、prevKeyと比較して、違っていればフッタを出力します。</p>
+<p>またitemListの行を出力するたびに、item.quantityをtotalに加算し、合計を求めて、フッタ内で出力しています。
+その後再度totalを「0」に初期化する事で、 キーブレイクごとの合計を表示するようにしています。</p>
 <p>以下のようなデータを「itemList」として埋め込みます。</p>
-<img src="images/exec02.png" /><p>すると、出力されたファイルはこうなります。</p>
-<img src="images/exec03.png" /></div>
-</div>
-<div class="section"><h2><a name="変数の評価の遅延">変数の評価の遅延</a></h2>
+<img src="image/exec02.jpg" />
+<p>すると、出力されたファイルはこうなります。</p>
+<img src="image/exec03.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="suspend">変数の評価の遅延</a></h2>
 <p>変数を書きたい位置が、変数の値が決定するタイミングより前にある場合、その変数の評価を遅らせる事が出来ます。</p>
 <p>例えば、見出し・明細形式の帳票で、明細の金額の合計欄が見出しにある場合、その値はループで明細を出力し終わらないとわからないので、見出しを出力する段階では評価する事が出来ません。</p>
 <p>その場合は見出しにある金額合計欄の変数の評価を遅延させ、明細出力ループが終了した時点で評価するようにします。</p>
-<div class="section"><h3>#suspend</h3>
+
+<div class="section">
+<h3>#suspend</h3>
 <p>このセルの変数は、セルの出力時には評価されず、後述の「#resume」で指定されるまで遅延されます。</p>
 
 <div class="source"><pre>#suspend ${hoge}
-</pre>
-</div>
+</pre></div>
 <p>この場合、バインド変数「hoge」はセルの出力時点では評価されません。</p>
-</div>
-<div class="section"><h3>#resume</h3>
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>#resume</h3>
 <p>これが書かれたセルに処理が移ったタイミングで、遅延された変数の評価をします。</p>
 <div class="source"><pre>#resume hoge
-</pre>
-</div>
-<p>この場合、バインド変数「hoge」があるセルのうち、未評価のものが評価されます。「$<a name="hoge">hoge</a>」となっていても、既に評価され値が入っている場合は上書きされません。</p>
+</pre></div>
+<p>この場合、バインド変数「hoge」があるセルのうち、未評価のものが評価されます。
+「$<a name="hoge">hoge</a>」となっていても、既に評価され値が入っている場合は上書きされません。</p>
+</div><!-- h3.section -->
 
-</div>
-<div class="section"><h3>例</h3>
+<div class="section">
+<h3>例</h3>
 <p>テンプレートは<a href="#スクリプト実行">スクリプト実行</a>で用いたものに修正を加えます。赤い字の部分が修正箇所です。</p>
-<img src="images/suspend01.png" /><p>データは<a href="#スクリプト実行">スクリプト実行</a>の時と同じものを使います。下のように出力されます。</p>
-<img src="images/suspend02.png" /><p>きちんとキーブレイク時のtotalの値がヘッダに出力されています。</p>
-</div>
-</div>
-<div class="section"><h2><a name="ハイパーリンク埋め込み">ハイパーリンク埋め込み</a></h2>
+<img src="image/suspend01.jpg" />
+<p>データは<a href="#スクリプト実行">スクリプト実行</a>の時と同じものを使います。下のように出力されます。</p>
+<img src="image/suspend02.jpg" />
+<p>きちんとキーブレイク時のtotalの値がヘッダに出力されています。</p>
+</div><!-- h3.section -->
 
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="link">ハイパーリンク埋め込み</a></h2>
 <p>URLなどの文字列をハイパーリンクにしたい場合、テンプレート上のセルの書式設定で可能となりますが、セル内に表示されている文字と実際のリンク先の値が別の場合があります。</p>
 <p>その場合、「#link-url」などと書くと、リンク先やセル内の文字を動的に指定する事が出来ます。</p>
 <p>リンク先の種類によって以下の4種類のタグがあります。</p>
-<dl><dt>link-url</dt>
-<dd>URLをリンクします。</dd>
-<dt>link-email</dt>
-<dd>メールアドレスをリンクします。</dd>
-<dt>link-file</dt>
-<dd>ローカルのファイルへリンクします。</dd>
-
-<dt>link-this</dt>
-<dd>このワークブック自身の特定のセルへリンクします。</dd>
+<dl>
+	<dt>link-url</dt>
+	<dd>URLをリンクします。</dd>
+	<dt>link-email</dt>
+	<dd>メールアドレスをリンクします。</dd>
+	<dt>link-file</dt>
+	<dd>ローカルのファイルへリンクします。</dd>
+	<dt>link-this</dt>
+	<dd>このワークブック自身の特定のセルへリンクします。</dd>
 </dl>
-<div class="section"><h3>構文</h3>
+
+<div class="section">
+<h3>構文</h3>
 <p>いずれのタグも同じです。ここでは#link-urlで説明します。</p>
 <div class="source"><pre>#link-url link=http://www.seasar.org text=リンク先
-</pre>
-</div>
+</pre></div>
 <p>「link」にリンク先を指定します。「text」に実際にセルに表示する値を指定します。いずれも必須です。</p>
 <p>また、「link」「text」のいずれにもバインド変数を書く事が出来ます。</p>
-</div>
+</div><!-- h3.section -->
 
-<div class="section"><h3>例</h3>
+<div class="section">
+<h3>例</h3>
 <p>以下のようにテンプレートを記述します。</p>
-<img src="images/link01.png" /><p>Java側でデータを設定します。</p>
+<img src="image/link01.jpg" />
+<p>Java側でデータを設定します。</p>
 <div class="source"><pre>public class Foo{
     private String name;
     private int num;
@@ -420,8 +495,7 @@ data.put(&quot;list&quot;, list);
     }
     (setter、getter省略)
 }
-</pre>
-</div>
+</pre></div>
 <div class="source"><pre>Map map = new HashMap();
 List list = new ArrayList();
 list.add(new Foo(&quot;1行目&quot;,10,&quot;http://www.google.com&quot;));
@@ -429,25 +503,35 @@ list.add(new Foo(&quot;2行目&quot;,20,&quot;http://www.seasar.org&quot;));
 list.add(new Foo(&quot;3行目&quot;,30,&quot;http://www.yahoo.com&quot;));
 list.add(new Foo(&quot;4行目&quot;,10,&quot;http://www.example.com&quot;));
 map.put(&quot;fooList&quot;, list);
-
-</pre>
-</div>
+</pre></div>
 <p>この場合、出力ファイルは以下の様になります。</p>
-<img src="images/link02.png" /><p>見た目は普通のセルと変わりないですが、カーソルを上に持って行くとツールチップが表示され、リンク先が確認出来ます。</p>
-<img src="images/link03.png" /><p>もっとリンクらしくフォントの書式を変えたい場合は、下記のようにテンプレート上で書式設定する事で可能です。</p>
-<img src="images/link04.png" /></div>
-</div>
-<div class="section"><h2><a name="コメント">コメント</a></h2>
-<p>テンプレート内にコメントを記入する事が出来ます。出力されるファイルには一切反映されません。</p>
-<div class="section"><h3>#comment</h3>
-<p>テンプレートのA列に「#comment」と書くと、その行はコメントになり、出力されるファイルには無視されます。</p>
+<img src="image/link02.jpg" />
+<p>見た目は普通のセルと変わりないですが、カーソルを上に持って行くとツールチップが表示され、リンク先が確認出来ます。</p>
+<img src="image/link03.jpg" />
+<p>もっとリンクらしくフォントの書式を変えたい場合は、下記のようにテンプレート上で書式設定する事で可能です。</p>
+<img src="image/link04.jpg" />
+</div><!-- h3.section -->
 
-<img src="images/comment01.png" /></div>
-<div class="section"><h3>制御文のB列以降</h3>
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="comment">コメント</a></h2>
+<p>テンプレート内にコメントを記入する事が出来ます。出力されるファイルには一切反映されません。</p>
+
+<div class="section">
+<h3>#comment</h3>
+<p>テンプレートのA列に「#comment」と書くと、その行はコメントになり、出力されるファイルには無視されます。</p>
+<img src="image/comment01.jpg" />
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>制御文のB列以降</h3>
 <p>A列に制御文を書いた場合、B列以降は無視されますので、ここにコメントを記入する事が出来ます。</p>
 <p>例えば、#endの横にコメントを書いておくと、どのブロック構文に対する#endかが判りやすくなります。</p>
-<img src="images/comment02.png" /></div>
-</div>
+<img src="image/comment02.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
 
 
 </div><!-- article -->
