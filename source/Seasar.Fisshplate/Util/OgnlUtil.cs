@@ -39,19 +39,36 @@ namespace Seasar.Fisshplate.Util
 
         private static string ToEvalExpr(string expression)
         {
+            //Trimしてから計算する。
+            expression = expression.Trim();
+            //からの場合、何もしない。
+            if (expression.Length == 0)
+            {
+                return expression;
+            }
             // ''形式の場合、ただの文字列なのでスルー
-            if (Regex.Match(expression.Trim(), @"^'.*'$").Success)
+            if (Regex.Match(expression, @"^'.*'$").Success)
+            {
+                return expression;
+            }
+            //数字から始まる場合もスルー
+            if (Regex.Match(expression, @"^[0-9]+").Success)
+            {
+                return expression;
+            }
+            //「.」から始まる場合もスルー
+            if (expression.StartsWith("."))
             {
                 return expression;
             }
 
             // "true", "false" の場合、 boolean値なのでスルー
-            if (expression.Trim() == "true" || expression.Trim() == "false")
+            if (expression == "true" || expression == "false")
             {
                 return expression;
             }
-            //__obj__['～']形式の場合、正しい形式なので何もしない。
-            if (Regex.Match(expression.Trim(), @"^__obj__\['\S+'\]").Success)
+            //__obj__の場合、予約語なので何もしない。
+            if (expression == "__obj__")
             {
                 return expression;
             }
@@ -79,16 +96,21 @@ namespace Seasar.Fisshplate.Util
 
         public static string ToEvalFormula(string expression)
         {
-            Regex _varPat = new Regex(@"[^\s\+\-\(\)&|\=/%\*,0-9]{1}[^\s\+\-\(\)&|\=/%\*]*");
-            MatchCollection matCol = _varPat.Matches(expression);
+            expression = expression.Replace(" ", "");
 
+            Regex varPat = new Regex(@"[^\+\-\*/%(\)&|\=\!><\[\]]*");
+            MatchCollection matCol = varPat.Matches(expression);
             string exp = String.Empty;
 
             int idx = 0;
             foreach (Match mat in matCol)
             {
+                String varExp = mat.Value;
                 exp += expression.Substring(idx, mat.Index - idx);
-                string varExp = ToEvalExpr(mat.Value);
+                if (mat.Value.Trim().StartsWith(".") == false || mat.Value.Trim().Length != 0)
+                {
+                    varExp = ToEvalExpr(mat.Value);
+                }
                 exp += varExp;
                 idx = mat.Index + mat.Length;
             }
@@ -97,6 +119,25 @@ namespace Seasar.Fisshplate.Util
                 exp += expression.Substring(idx);
             }
             return exp;
+
+            //Regex _varPat = new Regex(@"[^\s\+\-\(\)&|\=\!/%><\*,0-9]{1}[^\s\+\-\(\)&|\=\!/%><\*]*");
+            //MatchCollection matCol = _varPat.Matches(expression);
+
+            //string exp = String.Empty;
+
+            //int idx = 0;
+            //foreach (Match mat in matCol)
+            //{
+            //    exp += expression.Substring(idx, mat.Index - idx);
+            //    string varExp = ToEvalExpr(mat.Value);
+            //    exp += varExp;
+            //    idx = mat.Index + mat.Length;
+            //}
+            //if (idx < expression.Length)
+            //{
+            //    exp += expression.Substring(idx);
+            //}
+            //return exp;
         }
 
     }

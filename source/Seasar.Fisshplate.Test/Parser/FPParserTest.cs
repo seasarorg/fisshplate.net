@@ -7,6 +7,7 @@ using Seasar.Fisshplate.Wrapper;
 using NPOI.HSSF.UserModel;
 using Seasar.Fisshplate.Parser;
 using Seasar.Fisshplate.Core.Element;
+using Seasar.Fisshplate.Parser.Handler;
 
 namespace Seasar.Fisshplate.Test.Parser
 {
@@ -147,9 +148,25 @@ namespace Seasar.Fisshplate.Test.Parser
                 Assert.AreEqual(typeof(Exec), row.GetType());
 
             }
+        }
 
+        [Test]
+        public void Test_Suspend解析()
+        {
 
+            using (Stream s = new FileStream("FPTemplate_SuspendTest.xls", FileMode.Open, FileAccess.Read))
+            {
+                FPParser parser = new FPParser();
 
+                WorkbookWrapper workbook = new WorkbookWrapper(new HSSFWorkbook(s));
+                CellWrapper cellWrapper = workbook.GetSheetAt(0).GetRow(3).GetCell(3);
+
+                CellParserHandler handler = new CellParserHandler();
+                TemplateElement elem = handler.GetElement(cellWrapper);
+                Assert.AreEqual(typeof(Suspend), elem.GetType());
+                // Suspendとしてかいせきされている！
+
+            }
 
         }
     }

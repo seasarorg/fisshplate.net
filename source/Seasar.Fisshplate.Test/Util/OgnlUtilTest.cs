@@ -12,17 +12,24 @@ namespace Seasar.Fisshplate.Test.Util
         [Test]
         public void TestDeclareVar()
         {
+            string ss = "__obj__['hoge']";
+            string ee = OgnlUtil.ToEvalFormula(ss);
+            Assert.AreEqual("__obj__['hoge']", ee);
+
             string str = "name = __obj__['hoge'] + (__obj__.fuga - moge) && || sage";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("__obj__['name'] = __obj__['hoge'] + (__obj__['__obj__'].fuga - __obj__['moge']) && || __obj__['sage']", exp);
+            Assert.AreEqual("__obj__['name']=__obj__['hoge']+(__obj__['__obj__'].fuga-__obj__['moge'])&&||__obj__['sage']", exp);
         }
 
         [Test]
-        public void Test変数名がdataの場合()
+        public void Test変数名が__obj__の場合()
         {
-            string str = "name = data + data.fuga";
+            //__obj__は予約後なので、普通には使えない（制限事項）
+            //必ず連想配列形式で利用すること！！
+            string str = "__obj__['__obj__'] = __obj__ + __obj__['fuga']";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("__obj__['name'] = __obj__['data'] + __obj__['data'].fuga", exp);
+            Assert.AreEqual("__obj__['__obj__']=__obj__+__obj__['fuga']", exp);
+            //この形式の文字列は正常には動作しない。
         }
 
         [Test]
@@ -30,7 +37,33 @@ namespace Seasar.Fisshplate.Test.Util
         {
             string str = "name = hoge['moge'] + foo[123].age";
             string exp = OgnlUtil.ToEvalFormula(str);
-            Assert.AreEqual("__obj__['name'] = __obj__['hoge']['moge'] + __obj__['foo'][123].age", exp);
+            Assert.AreEqual("__obj__['name']=__obj__['hoge']['moge']+__obj__['foo'][123].age", exp);
+        }
+
+        [Test]
+        public void TestBoolean条件の場合()
+        {
+            string str = "idx < 12";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("__obj__['idx']<12", exp);
+
+            str = @"prevKey!=item.Key";
+            exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual(@"__obj__['prevKey']!=__obj__['item'].Key", exp);
+
+            str = @"itemList.Count == index+1||prevKey != itemList[index + 1].Key";
+            exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual(@"__obj__['itemList'].Count==__obj__['index']+1||__obj__['prevKey']!=__obj__['itemList'][__obj__['index']+1].Key", exp);
+
+        }
+
+        [Test]
+        public void Test空白がない場合()
+        {
+            string str = "index%2==0";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("__obj__['index']%2==0", exp);
+
         }
     }
 }
