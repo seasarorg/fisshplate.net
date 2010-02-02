@@ -84,7 +84,8 @@ namespace Seasar.Fisshplate.Exception
             ResourceManager rm = EFPMessages.ResourceManager;
             
             string msg = rm.GetString(messageId);
-            this._message = String.Format(msg, _args);
+            // [EFP99999]メッセージ のような形式にする。
+            this._message = "[" + messageId + "]" + String.Format(msg, _args);
         }
 
         private object[] GetParam(object[] args, RowWrapper row)
