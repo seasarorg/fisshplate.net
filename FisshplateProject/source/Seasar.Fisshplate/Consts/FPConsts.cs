@@ -61,7 +61,7 @@ namespace Seasar.Fisshplate.Consts
 
         public const string RegexBindVarStart = @"\$\{";
         public const string RegexBindVarEnd = @"\}";
-        public const string RegexBindVar = RegexBindVarStart + "[^" + RegexBindVarStart + RegexBindVarEnd + "]" + "+" + RegexBindVarEnd;
+        public const string RegexBindVar = RegexBindVarStart + @"[^" + RegexBindVarStart + RegexBindVarEnd + @"]" + @"+" + RegexBindVarEnd;
 
         public const string PreviewEmptyListSign = "empty list";
 

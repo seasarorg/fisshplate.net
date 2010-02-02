@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta http-equiv="Content-Language" content="ja" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="keywords" content="fisshplate.net, Seasar, The Seasar Project, The Seasar Foundation, OSS, Open Source Software, Java, Framework" />
+<meta name="keywords" content="fisshplate.net, Seasar, The Seasar Project, The Seasar Foundation, OSS, Open Source Software, .NET, Framework" />
 <meta name="description" content="fisshplate.net" />
 <title>Fisshplate.net 文法</title>
 <link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/main.css" media="screen,projection" />
@@ -85,7 +85,6 @@
 <div id="article">
 
 <div class="section">
-TODO:全部見直すこと！
 <h2>目次</h2>
 <ul>
 	<li><a href="#foreach">foreach</a></li>
@@ -230,7 +229,7 @@ data["fooList"] = list;
 <div class="section"><h3>例</h3>
 <p>テンプレートを作ります</p>
 <img src="image/hforeach01.jpg" />
-<p>「#hforeach」を任意の列に書きます。その列から右の列がまとめて横に展開されます。 
+<p>「#hforeach」を任意の列に書きます。その列からcolcountで指定された列数がまとめて横に展開されます。 
 上の例の場合、「金額一覧」と「月」の列はタグより左にあるため、繰り返されません。</p>
 <p>.NET側でデータを用意します。</p>
 <div class="source"><pre>public class Data
@@ -304,7 +303,7 @@ data["list"] = list;
 <p>また、「#else if」を使って、下記のようなテンプレートを作った場合は</p>
 <img src="image/if03.jpg" />
 <p>同データでの出力結果はこの様になります。</p>
-<img src="image/if03.jpg" />
+<img src="image/if04.jpg" />
 </div><!-- h3.section -->
 
 </div><!-- h2.section -->
@@ -399,22 +398,21 @@ data["list"] = list;
 <h3>例</h3>
 <p>ここでは、ループの中である値が変わった時に、ヘッダとフッタを出力する例を挙げます。</p>
 <p>テンプレートはこのようになります。</p>
-<img src="image/exec01.jpg" />
+<img src="image/script01.jpg" />
 <p>#varを使い、変数を宣言しています。「total」は、宣言と同時に整数「0」で初期化しています。 
 他の変数は初期化していないので、初期値は空文字列となります。</p>
-<p>#execを使い、変数prevKeyにitem.keyの値を代入し、保存しています。</p>
-<p>前回の値であるprevKeyと、item.keyが違った場合、ヘッダを出力しています。</p>
-<p>フッタの場合は少し工夫が要ります。ここでは、itemListはjava.util.Listのインスタンスとします。
-配列の場合は異なってきますのでご注意下さい。</p>
-<p>ループインデックスに1を足した値と、itemList#size()が同じである場合は、最後の行なのでフッタを出力します。</p>
+<p>#execを使い、変数prevKeyにitem.Keyの値を代入し、保存しています。</p>
+<p>前回の値であるprevKeyと、item.Keyが違った場合、ヘッダを出力しています。</p>
+<p>フッタの場合は少し工夫が要ります。ここでは、itemListはSystem.Collections.Generic.IList<>のインスタンスとします。</p>
+<p>ループインデックスに1を足した値と、「itemList#Count」が同じである場合は、最後の行なのでフッタを出力します。</p>
 <p>そうでない場合、次回の値を取得する必要があります。
-ここでは、itemList#get(index +1).keyで取得し、prevKeyと比較して、違っていればフッタを出力します。</p>
-<p>またitemListの行を出力するたびに、item.quantityをtotalに加算し、合計を求めて、フッタ内で出力しています。
+ここでは、「itemList[index+1].Keyで取得し、prevKeyと比較して、違っていればフッタを出力します。</p>
+<p>またitemListの行を出力するたびに、item.Quantityをtotalに加算し、合計を求めて、フッタ内で出力しています。
 その後再度totalを「0」に初期化する事で、 キーブレイクごとの合計を表示するようにしています。</p>
 <p>以下のようなデータを「itemList」として埋め込みます。</p>
-<img src="image/exec02.jpg" />
+<img src="image/script02.jpg" />
 <p>すると、出力されたファイルはこうなります。</p>
-<img src="image/exec03.jpg" />
+<img src="image/script03.jpg" />
 </div><!-- h3.section -->
 
 </div><!-- h2.section -->
@@ -483,33 +481,85 @@ data["list"] = list;
 <h3>例</h3>
 <p>以下のようにテンプレートを記述します。</p>
 <img src="image/link01.jpg" />
-<p>Java側でデータを設定します。</p>
-<div class="source"><pre>public class Foo{
-    private String name;
-    private int num;
-    private String address;
-    public Foo(String name, int num, String address){
-        this.name = name;
-        this.num = num;
-        this.address = address;
-    }
-    (setter、getter省略)
-}
-</pre></div>
-<div class="source"><pre>Map map = new HashMap();
-List list = new ArrayList();
-list.add(new Foo(&quot;1行目&quot;,10,&quot;http://www.google.com&quot;));
-list.add(new Foo(&quot;2行目&quot;,20,&quot;http://www.seasar.org&quot;));
-list.add(new Foo(&quot;3行目&quot;,30,&quot;http://www.yahoo.com&quot;));
-list.add(new Foo(&quot;4行目&quot;,10,&quot;http://www.example.com&quot;));
-map.put(&quot;fooList&quot;, list);
-</pre></div>
+<p>.NET側でデータを設定します。</p>
+<div class="source"><pre>public class Bar
+{
+    public int Num { get; set; }
+    public string Name { get; set; }
+    public string Address { get; set; }
+}</pre></div>
+<div class="source"><pre>IDictionary&lt;string, object&gt; data = new Dictionary&lt;string, object&gt;();
+IList&lt;Bar&gt; fooList = new List&lt;Bar&gt;()
+{
+    new Bar(){Num=10,Name="1行目",Address="http://www.google.com"},
+    new Bar(){Num=20,Name="2行目",Address="http://www.seasar.org"},
+    new Bar(){Num=30,Name="3行目",Address="http://www.apple.com"},
+    new Bar(){Num=10,Name="4行目",Address="http://ja.openoffice.org/"},
+};
+data["fooList"] = fooList;</pre></div>
 <p>この場合、出力ファイルは以下の様になります。</p>
 <img src="image/link02.jpg" />
 <p>見た目は普通のセルと変わりないですが、カーソルを上に持って行くとツールチップが表示され、リンク先が確認出来ます。</p>
 <img src="image/link03.jpg" />
 <p>もっとリンクらしくフォントの書式を変えたい場合は、下記のようにテンプレート上で書式設定する事で可能です。</p>
 <img src="image/link04.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+<div class="section">
+<h2><a name="comment">コメント</a></h2>
+<p>テンプレート内にコメントを記入する事が出来ます。出力されるファイルには一切反映されません。</p>
+
+<div class="section">
+<h3>#comment</h3>
+<p>テンプレートのA列に「#comment」と書くと、その行はコメントになり、出力されるファイルには無視されます。</p>
+<img src="image/comment01.jpg" />
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>制御文のB列以降</h3>
+<p>A列に制御文を書いた場合、B列以降は無視されますので、ここにコメントを記入する事が出来ます。</p>
+<p>例えば、#endの横にコメントを書いておくと、どのブロック構文に対する#endかが判りやすくなります。</p>
+<img src="image/comment02.jpg" />
+</div><!-- h3.section -->
+
+</div><!-- h2.section -->
+
+
+<div class="section">
+<h2><a name="picture">画像埋め込み</a></h2>
+<p>動的に画像ファイルを配置する場合に使います。</p>
+<p>画像ファイルは、「#picture」と書いたセル上に配置されます。</p>
+
+<div class="section">
+<h3>構文</h3>
+<div class="source"><pre>#picture (path cell=cellCount row=rowCount)
+</pre></div>
+<dl>
+	<dt>path</dt>
+	<dd>画像ファイルへのパスを記述します。バインド変数を利用することも出来ます。</dd>
+	<dt>cellCount</dt>
+	<dd>画像ファイルを表示する横幅です。列数を指定します。</dd>
+	<dt>rowCount</dt>
+	<dd>画像ファイルを表示する縦幅です。行数を指定します。</dd>
+</dl>
+</div><!-- h3.section -->
+
+<div class="section">
+<h3>例</h3>
+<p>以下のようにテンプレートを記述します。</p>
+<p>ここでは、変数名で指定しています。</p>
+<img src="image/picture01.jpg" />
+<p>この場合、出力ファイルは以下の様になります。</p>
+<img src="image/picture02.jpg" />
+<p>以下のようにパスを文字列で指定することも出来ます。出力結果は変わりません</p>
+<img src="image/picture03.jpg" />
+<p>画像ファイルのパスは、実行ファイルから参照可能なファイルのパスを指定してください。
+埋込みリソースには対応しておりません。</p>
+<p>画像ファイルの形式は「jpg」と「png」形式のみ対応しています。</p>
+<p>画像サイズの微調整は行えません。セルの大きさに依存します。
+拡大・縮小して配置する場合は縦横比に気をつけてください。</p>
 </div><!-- h3.section -->
 
 </div><!-- h2.section -->

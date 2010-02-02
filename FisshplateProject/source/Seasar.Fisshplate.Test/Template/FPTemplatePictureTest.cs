@@ -61,12 +61,13 @@ namespace Seasar.Fisshplate.Test.Template
         }
 
         [Test]
-        public void Test画像出力_パスをリテラルで指定()
+        public void Test画像出力_パスをリテラルと変数で指定()
         {
             HSSFWorkbook wb = null;
             FPTemplate template = new FPTemplate();
             IDictionary<string, object> data = new Dictionary<string, object>();
             data["data"] = "hoge";
+            data["picture"] = "seasar.jpg";
             wb = template.Process("FPTemplatePictureTest3.xls", data);
 
             using (Stream fos = new FileStream("out_picture3.xls", FileMode.Create, FileAccess.Write))

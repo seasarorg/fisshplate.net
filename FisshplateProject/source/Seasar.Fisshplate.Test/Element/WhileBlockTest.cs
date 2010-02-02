@@ -30,5 +30,11 @@ namespace Seasar.Fisshplate.Test.Element
                 Assert.IsTrue(true);
             }
         }
+
+        [Test]
+        public void Test条件テスト()
+        {
+
+        }
     }
 }
