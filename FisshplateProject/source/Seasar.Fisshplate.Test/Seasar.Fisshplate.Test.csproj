@@ -146,6 +146,7 @@
     <None Include="FPTemplateTest_nestedLoop.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="HForeachForeachTest.xls" />
     <None Include="HorizontalIteratorTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -168,6 +169,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FPTemplate_LinkTest.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplate_ForEachTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

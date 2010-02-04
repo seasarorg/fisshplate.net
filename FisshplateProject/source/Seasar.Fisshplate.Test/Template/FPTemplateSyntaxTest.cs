@@ -14,6 +14,29 @@ namespace Seasar.Fisshplate.Test.Template
     public class FPTemplateSyntaxTest
     {
         [Test]
+        public void Test_ForEachテスト_１カラム目にデータを出力しない()
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>();
+            IList<Foo> fooList = new List<Foo>()
+            {
+                new Foo(){Num = 10, Name = "1行目"},
+                new Foo(){Num = 20, Name = "2行目"},
+                new Foo(){Num = 30, Name = "3行目"},
+                new Foo(){Num = 10, Name = "4行目"},
+                new Foo(){Num = 20, Name = "5行目"},
+                new Foo(){Num = 30, Name = "6行目"},
+            };
+            data["title"] = "タイトルです";
+            data["fooList"] = fooList;
+            FPTemplate template = new FPTemplate();
+            HSSFWorkbook wb = template.Process("FPTemplate_ForEachTest.xls", data);
+            using (Stream s = new FileStream("out_FPTemplate_ForEachTest.xls", FileMode.Create, FileAccess.Write))
+            {
+                wb.Write(s);
+            }
+        }
+
+        [Test]
         public void Test_Whileテスト_ドキュメント用()
         {
             FPTemplate template = new FPTemplate();

@@ -74,7 +74,7 @@ namespace Seasar.Fisshplate.Wrapper
 
         private void RemoveAllRow()
         {
-            for (int i = 0; i < RowCount - 1; i++)
+            for (int i = 0; i < RowCount; i++)
             {
                 HSSFRow hssfRow = GetRow(i).HSSFRow;
                 if (hssfRow != null)
