@@ -40,13 +40,23 @@ namespace Seasar.S2Fisshplate.Interceptors
         private HSSFWorkbook GetWorkbook(MethodBase method)
         {
             //属性の取得
-            object[] attributes = method.GetCustomAttributes(typeof(FPTemplateAttribute), false);
+            object[] attributes = method.GetCustomAttributes(false);
             foreach (object o in attributes)
 	        {
-                FPTemplateAttribute attribute = (FPTemplateAttribute)o;
-
                 // テンプレートのパスを取得する。
-                string path = attribute.Path;
+                string path = String.Empty;
+                if (o is FPTemplateAttribute)
+                {
+                    path = ((FPTemplateAttribute)o).Path;
+                }
+                else if (o is FPTemplateFileAttribute)
+                {
+                    path = ((FPTemplateFileAttribute)o).Path;
+                }
+                else
+                {
+                    continue;
+                }
 
                 try
                 {
@@ -62,6 +72,7 @@ namespace Seasar.S2Fisshplate.Interceptors
                     throw new ApplicationException("ファイルが開けません", e);
                 }
 	        }
+
             return null;
         }
     }

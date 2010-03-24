@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Seasar.S2Fisshplate.Attr
 {
-    [Obsolete("0.3.0以降この属性は削除されます。FPTemplateFileAttributeを利用して下さい。")]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]
-    public class FPTemplateAttribute : Attribute
+    public class FPTemplateFileAttribute : Attribute
     {
         private readonly string _path;
 
@@ -15,7 +14,7 @@ namespace Seasar.S2Fisshplate.Attr
             get { return _path; }
         }
 
-        public FPTemplateAttribute(string path)
+        public FPTemplateFileAttribute(string path)
         {
             _path = path;
         }
