@@ -7,6 +7,7 @@ using Seasar.Fisshplate.Consts;
 using Seasar.Fisshplate.Util;
 using System.Collections;
 using NPOI.HSSF.UserModel;
+using System.Diagnostics;
 
 namespace Seasar.Fisshplate.Core.Element
 {
@@ -52,6 +53,7 @@ namespace Seasar.Fisshplate.Core.Element
             int startCell = _startCellIndex;
             int maxCellNum = GetMaxCellNum();
 
+            // #hforeach の前
             MergeNoIterationBlock(context);
 
             while (ite.MoveNext())
@@ -64,6 +66,13 @@ namespace Seasar.Fisshplate.Core.Element
                 MergeBlock(context, startCell, maxCellNum);
                 startCell += maxCellNum;
             }
+            // #hforeachの後ろ
+            context.MoveCurrentRowTo(startRowNum);
+            int afterCell = _startCellIndex + maxCellNum;
+            // startCell ・・・ ループ後の開始位置
+            // afterCell ・・・ テンプレート上の固定行の開始位置
+            MergeAfterIterationBlock(context, startCell, afterCell);
+
         }
 
         private int GetMaxCellNum()
@@ -171,6 +180,41 @@ namespace Seasar.Fisshplate.Core.Element
             }
             context.NextRow();
 
+        }
+
+        private void MergeAfterIterationBlock(Seasar.Fisshplate.Context.FPContext context, int startCellIndex, int afterCellIndex)
+        {
+            foreach (TemplateElement elem in _childList)
+            {
+                if (elem is Row)
+                {
+                    MergeAfterIterationRow(context, startCellIndex, afterCellIndex, (Row)elem);
+                }
+                else
+                {
+                    elem.Merge(context);
+                }
+            }
+        }
+
+        private static void MergeAfterIterationRow(Seasar.Fisshplate.Context.FPContext context, int startCellIndex, int afterCellIndex, Row row)
+        {
+            HSSFRow outRow = context.CurrentRow;
+            IDictionary<string, object> data = context.Data;
+            data[FPConsts.RowNumberName] = context.CurrentRowNum + 1;
+            context.MoveCurrentCellTo(startCellIndex);
+            for (int i = 0; i < row.CellElementList.Count; i++)
+            {
+                if (i < afterCellIndex)
+                {
+                    continue;
+                }
+
+                TemplateElement temElem = (TemplateElement)row.CellElementList[i];
+                temElem.Merge(context);
+                //context.NextCell();
+            }
+            context.NextRow();
         }
     }
 }

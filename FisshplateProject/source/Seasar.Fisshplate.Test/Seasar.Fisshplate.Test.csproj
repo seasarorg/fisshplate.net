@@ -101,6 +101,7 @@
     <Compile Include="Parser\WhileParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexTest\RegexTest.cs" />
+    <Compile Include="Template\FPTemplateForEachWithHForeachTest.cs" />
     <Compile Include="Template\FPTemplatePictureTest.cs" />
     <Compile Include="Template\FPTemplateSyntaxTest.cs" />
     <Compile Include="Template\FPTemplateTest.cs" />
@@ -172,6 +173,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FPTemplate_ForEachTest.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplate_ForEach_HForEachTest.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FPTemplate_ForEach_HForEachTest2.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

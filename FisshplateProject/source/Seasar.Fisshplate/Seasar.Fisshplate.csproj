@@ -141,7 +141,6 @@
     <Compile Include="Util\InputStreamUtil.cs" />
     <Compile Include="Util\JScriptUtil.cs" />
     <Compile Include="Util\OgnlUtil.cs" />
-    <Compile Include="Util\ResourceUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="Wrapper\CellWrapper.cs" />
     <Compile Include="Wrapper\RowWrapper.cs" />
