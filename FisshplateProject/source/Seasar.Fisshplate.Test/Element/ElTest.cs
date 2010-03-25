@@ -18,7 +18,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Testデータは数字だけど文字列型の場合は文字列型()
         {
-            using (FileStream fs = new FileStream("ElTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);
@@ -51,7 +51,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Test変数にビックリマークをつけた場合はNull回避()
         {
-            using (FileStream fs = new FileStream("ElTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);
@@ -95,7 +95,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Test文字列に埋め込み()
         {
-            using (FileStream fs = new FileStream("ElTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);
@@ -116,7 +116,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Test文字列埋込複数()
         {
-            using (FileStream fs = new FileStream("ElTest_multi.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest_multi.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);
@@ -158,7 +158,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Test改行コード変換()
         {
-            using (FileStream fs = new FileStream("ElTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);
@@ -191,7 +191,7 @@ namespace Seasar.Fisshplate.Test.Element
         [Test]
         public void Testバインド変数でメソッドや配列要素アクセス()
         {
-            using (FileStream fs = new FileStream("ElTest_method.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\ElTest_method.xls", FileMode.Open, FileAccess.Read))
             {
                 HSSFWorkbook template = new HSSFWorkbook(fs);
                 WorkbookWrapper workbook = new WorkbookWrapper(template);

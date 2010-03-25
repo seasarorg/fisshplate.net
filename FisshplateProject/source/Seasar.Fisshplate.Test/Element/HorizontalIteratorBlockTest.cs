@@ -20,7 +20,7 @@ namespace Seasar.Fisshplate.Test.Element
         public void Test横展開()
         {
             HSSFWorkbook wb = null;
-            using (Stream s = new FileStream(@"HorizontalIteratorTest.xls", FileMode.Open))
+            using (Stream s = new FileStream(@"TestResource\Template\HorizontalIteratorTest.xls", FileMode.Open))
             {
                 IList<Sample> list = new List<Sample>()
                 {

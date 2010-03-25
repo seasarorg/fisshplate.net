@@ -17,7 +17,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test画像出力()
         {
             HSSFWorkbook wb = null;
-            using (Stream s = new FileStream("FPTemplatePictureTest.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\FPTemplatePictureTest.xls", FileMode.Open, FileAccess.Read))
             {
                 FPTemplate template = new FPTemplate();
                 IDictionary<string, object> data = new Dictionary<string, object>();
@@ -36,7 +36,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test行の要素がリストの場合の画像出力()
         {
             HSSFWorkbook wb = null;
-            using (Stream s = new FileStream("FPTemplatePictureTest2.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\FPTemplatePictureTest2.xls", FileMode.Open, FileAccess.Read))
             {
                 FPTemplate template = new FPTemplate();
                 IDictionary<string, object> data = new Dictionary<string, object>();
@@ -68,7 +68,7 @@ namespace Seasar.Fisshplate.Test.Template
             IDictionary<string, object> data = new Dictionary<string, object>();
             data["data"] = "hoge";
             data["picture"] = "seasar.jpg";
-            wb = template.Process("FPTemplatePictureTest3.xls", data);
+            wb = template.Process(@"TestResource\Template\FPTemplatePictureTest3.xls", data);
 
             using (Stream fos = new FileStream("out_picture3.xls", FileMode.Create, FileAccess.Write))
             {

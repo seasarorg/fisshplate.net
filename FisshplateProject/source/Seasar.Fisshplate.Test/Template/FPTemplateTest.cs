@@ -21,7 +21,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test行の要素がリストの場合()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -57,7 +57,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test行の要素がリストの場合_1件()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -86,7 +86,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test行の要素が配列の場合()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -120,7 +120,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Testループのテスト()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest_nestedLoop.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest_nestedLoop.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -154,7 +154,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test最後のヘッダフッタ制御のテスト_ぴったりの場合()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest_lastPageHandling.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest_lastPageHandling.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -192,7 +192,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test最後のヘッダフッタ制御のテスト_あまる場合()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest_lastPageHandling2.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest_lastPageHandling2.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -230,7 +230,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test空行指定()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest_iteratorMax.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest_iteratorMax.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -265,7 +265,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test空行指定_改ページ対応()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplateTest_iteratorMax_pageBreak.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplateTest_iteratorMax_pageBreak.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {

@@ -106,79 +106,83 @@
     <Compile Include="Template\FPTemplateSyntaxTest.cs" />
     <Compile Include="Template\FPTemplateTest.cs" />
     <Compile Include="Template\TemplateValueTest.cs" />
+    <Compile Include="Util\FPPoiUtilTest.cs" />
     <Compile Include="Util\JScriptUtilTest.cs" />
     <Compile Include="Util\OgnlUtilTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ElTest.xls">
+    <None Include="TestResource\Template\ElTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ElTest_method.xls">
+    <None Include="TestResource\Template\ElTest_method.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ElTest_multi.xls">
+    <None Include="TestResource\Template\ElTest_multi.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplatePictureTest.xls">
+    <None Include="TestResource\Template\FPTemplatePictureTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplatePictureTest2.xls">
+    <None Include="TestResource\Template\FPTemplatePictureTest2.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplatePictureTest3.xls">
+    <None Include="TestResource\Template\FPTemplatePictureTest3.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest.xls">
+    <None Include="TestResource\Template\FPTemplateTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest_iteratorMax.xls">
+    <None Include="TestResource\Template\FPTemplateTest_iteratorMax.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest_iteratorMax_pageBreak.xls">
+    <None Include="TestResource\Template\FPTemplateTest_iteratorMax_pageBreak.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest_lastPageHandling.xls">
+    <None Include="TestResource\Template\FPTemplateTest_lastPageHandling.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest_lastPageHandling2.xls">
+    <None Include="TestResource\Template\FPTemplateTest_lastPageHandling2.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplateTest_nestedLoop.xls">
+    <None Include="TestResource\Template\FPTemplateTest_nestedLoop.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="HForeachForeachTest.xls" />
-    <None Include="HorizontalIteratorTest.xls">
+    <None Include="TestResource\Template\HForeachForeachTest.xls" />
+    <None Include="TestResource\Template\HorizontalIteratorTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TemplateValueTest.xls">
+    <None Include="TestResource\Template\TemplateValueTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_WhileTest.xls">
+    <None Include="TestResource\Template\FPTemplate_WhileTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_IfTest.xls">
+    <None Include="TestResource\Template\FPTemplate_IfTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_PageBreakTest.xls">
+    <None Include="TestResource\Template\FPTemplate_PageBreakTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_ScriptTest.xls">
+    <None Include="TestResource\Template\FPTemplate_ScriptTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_SuspendTest.xls">
+    <None Include="TestResource\Template\FPTemplate_SuspendTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_LinkTest.xls">
+    <None Include="TestResource\Template\FPTemplate_LinkTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_ForEachTest.xls">
+    <None Include="TestResource\Template\FPTemplate_ForEachTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_ForEach_HForEachTest.xls">
+    <None Include="TestResource\Template\FPTemplate_ForEach_HForEachTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FPTemplate_ForEach_HForEachTest2.xls">
+    <None Include="TestResource\Template\FPTemplate_ForEach_HForEachTest2.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Util\FPPoiuUtil.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -201,6 +205,10 @@
     <Content Include="seasar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Preview\" />
+    <Folder Include="TestResource\Expected\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

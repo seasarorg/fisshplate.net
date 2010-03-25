@@ -17,7 +17,7 @@ namespace Seasar.Fisshplate.Test.Parser
         [Test]
         public void Test解析テスト1()
         {
-            using (Stream s = new FileStream("FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\FPTemplateTest.xls", FileMode.Open, FileAccess.Read))
             {
                 WorkbookWrapper workbook = new WorkbookWrapper(new HSSFWorkbook(s));
                 FPParser parser = new FPParser();
@@ -154,7 +154,7 @@ namespace Seasar.Fisshplate.Test.Parser
         public void Test_Suspend解析()
         {
 
-            using (Stream s = new FileStream("FPTemplate_SuspendTest.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\FPTemplate_SuspendTest.xls", FileMode.Open, FileAccess.Read))
             {
                 FPParser parser = new FPParser();
 

@@ -18,7 +18,7 @@ namespace Seasar.Fisshplate.Test.Parser
         [Test]
         public void TestHForEach解析()
         {
-            using (Stream s = new FileStream("HorizontalIteratorTest.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\HorizontalIteratorTest.xls", FileMode.Open, FileAccess.Read))
             {
                 WorkbookWrapper workbook = new WorkbookWrapper(new HSSFWorkbook(s));
                 FPParser parser = new FPParser();

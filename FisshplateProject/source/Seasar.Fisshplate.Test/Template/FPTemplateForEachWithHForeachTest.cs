@@ -20,7 +20,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void test_単純なForEachとHForEach()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplate_ForEach_HForEachTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplate_ForEach_HForEachTest.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {
@@ -59,7 +59,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void test_カラム項目と行が可変な帳票()
         {
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("FPTemplate_ForEach_HForEachTest2.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\FPTemplate_ForEach_HForEachTest2.xls", FileMode.Open, FileAccess.Read))
             {
                 try
                 {

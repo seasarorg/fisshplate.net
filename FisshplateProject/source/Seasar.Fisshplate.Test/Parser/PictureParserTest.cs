@@ -17,7 +17,7 @@ namespace Seasar.Fisshplate.Test.Parser
         [Test]
         public void TestPicture解析()
         {
-            using (Stream s = new FileStream("FPTemplatePictureTest.xls", FileMode.Open, FileAccess.Read))
+            using (Stream s = new FileStream(@"TestResource\Template\FPTemplatePictureTest.xls", FileMode.Open, FileAccess.Read))
             {
                 WorkbookWrapper workbook = new WorkbookWrapper(new HSSFWorkbook(s));
                 FPParser parser = new FPParser();

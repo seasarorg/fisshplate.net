@@ -22,7 +22,7 @@ namespace Seasar.Fisshplate.Test.Template
 
             FPTemplate tamplate = new FPTemplate();
             HSSFWorkbook wb = null;
-            using (FileStream fs = new FileStream("TemplateValueTest.xls", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(@"TestResource\Template\TemplateValueTest.xls", FileMode.Open, FileAccess.Read))
             {
                 wb = tamplate.Process(fs, data);
             }

@@ -29,7 +29,7 @@ namespace Seasar.Fisshplate.Test.Template
             data["title"] = "タイトルです";
             data["fooList"] = fooList;
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_ForEachTest.xls", data);
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_ForEachTest.xls", data);
             using (Stream s = new FileStream("out_FPTemplate_ForEachTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
@@ -40,7 +40,7 @@ namespace Seasar.Fisshplate.Test.Template
         public void Test_Whileテスト_ドキュメント用()
         {
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_WhileTest.xls", new Dictionary<string, object>());
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_WhileTest.xls", new Dictionary<string, object>());
             using (Stream s = new FileStream("out_FPTemplate_WhileTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
@@ -61,7 +61,7 @@ namespace Seasar.Fisshplate.Test.Template
             };
             data["fooList"] = fooList;
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_IfTest.xls", data);
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_IfTest.xls", data);
             using (Stream s = new FileStream("out_FPTemplate_IfTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
@@ -87,7 +87,7 @@ namespace Seasar.Fisshplate.Test.Template
             data["title"] = "タイトル部分";
             data["b"] = fooList;
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_PageBreakTest.xls", data);
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_PageBreakTest.xls", data);
             using (Stream s = new FileStream("out_FPTemplate_PageBreakTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
@@ -121,7 +121,7 @@ namespace Seasar.Fisshplate.Test.Template
           };
             data["itemList"] = fooList;
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_ScriptTest.xls", data);
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_ScriptTest.xls", data);
             using (Stream s = new FileStream("out_FPTemplate_ScriptTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
@@ -129,7 +129,7 @@ namespace Seasar.Fisshplate.Test.Template
             IDictionary<string, object> data2 = new Dictionary<string, object>();
             data2["itemList"] = fooList;
             FPTemplate template2 = new FPTemplate();
-            HSSFWorkbook wb2 = template2.Process("FPTemplate_SuspendTest.xls", data2);
+            HSSFWorkbook wb2 = template2.Process(@"TestResource\Template\FPTemplate_SuspendTest.xls", data2);
             using (Stream s = new FileStream("out_FPTemplate_SuspendTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb2.Write(s);
@@ -149,7 +149,7 @@ namespace Seasar.Fisshplate.Test.Template
             };
             data["fooList"] = fooList;
             FPTemplate template = new FPTemplate();
-            HSSFWorkbook wb = template.Process("FPTemplate_LinkTest.xls", data);
+            HSSFWorkbook wb = template.Process(@"TestResource\Template\FPTemplate_LinkTest.xls", data);
             using (Stream s = new FileStream("out_FPTemplate_LinkTest.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(s);
