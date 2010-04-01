@@ -99,6 +99,8 @@
     <Compile Include="Parser\LinkParserTest.cs" />
     <Compile Include="Parser\PictureParserTest.cs" />
     <Compile Include="Parser\WhileParserTest.cs" />
+    <Compile Include="Preview\FPPreviewUtilTest.cs" />
+    <Compile Include="Preview\MapBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexTest\RegexTest.cs" />
     <Compile Include="Template\FPTemplateForEachWithHForeachTest.cs" />
@@ -152,6 +154,30 @@
     <None Include="TestResource\Template\HorizontalIteratorTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest2.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest_emptyList.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest_template.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest_without_root.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\MapBuilderTest_without_root_template.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\preview_data.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\Preview\preview_template.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestResource\Template\TemplateValueTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -193,21 +219,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="picture3.png">
+    <Content Include="TestResource\picture3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="picture1.png">
+    <Content Include="TestResource\picture1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="picture2.jpg">
+    <Content Include="TestResource\picture2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="seasar.jpg">
+    <Content Include="TestResource\seasar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Preview\" />
     <Folder Include="TestResource\Expected\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,7 @@ namespace Seasar.Fisshplate.Test.Template
             {
                 FPTemplate template = new FPTemplate();
                 IDictionary<string, object> data = new Dictionary<string, object>();
-                data["data"] = new A("1行目", 10, DateTime.Now, "picture1.png");
+                data["data"] = new A("1行目", 10, DateTime.Now, @"TestResource\picture1.png");
 
                 wb = template.Process(s, data);
             }
@@ -43,12 +43,12 @@ namespace Seasar.Fisshplate.Test.Template
                 data["title"] = "タイトルである";
                 IList<A> aList = new List<A>()
                 {
-                    new A("1行目", 10, DateTime.Now, "picture1.png"),
+                    new A("1行目", 10, DateTime.Now, @"TestResource\picture1.png"),
                     new A("2行目", 20, DateTime.Now, null),
-                    new A("3行目", 30, DateTime.Now, "picture2.jpg"),
-                    new A("4行目", 10, DateTime.Now, "picture1.png"),
-                    new A("5行目", 20, DateTime.Now, "picture1.png"),
-                    new A("6行目", 30, DateTime.Now, "picture3.png"),
+                    new A("3行目", 30, DateTime.Now, @"TestResource\picture2.jpg"),
+                    new A("4行目", 10, DateTime.Now, @"TestResource\picture1.png"),
+                    new A("5行目", 20, DateTime.Now, @"TestResource\picture1.png"),
+                    new A("6行目", 30, DateTime.Now, @"TestResource\picture3.png"),
                 };
                 data["b"] = aList;
 
@@ -67,10 +67,10 @@ namespace Seasar.Fisshplate.Test.Template
             FPTemplate template = new FPTemplate();
             IDictionary<string, object> data = new Dictionary<string, object>();
             data["data"] = "hoge";
-            data["picture"] = "seasar.jpg";
+            data["picture"] = @"TestResource\seasar.jpg";
             wb = template.Process(@"TestResource\Template\FPTemplatePictureTest3.xls", data);
 
-            using (Stream fos = new FileStream("out_picture3.xls", FileMode.Create, FileAccess.Write))
+            using (Stream fos = new FileStream(@"TestResource\out_picture3.xls", FileMode.Create, FileAccess.Write))
             {
                 wb.Write(fos);
             }
