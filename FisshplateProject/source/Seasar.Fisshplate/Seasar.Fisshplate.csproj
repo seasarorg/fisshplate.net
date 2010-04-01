@@ -110,6 +110,7 @@
     <Compile Include="Exception\FPMergeException.cs" />
     <Compile Include="Exception\FPParseException.cs" />
     <Compile Include="Enum\LinkElementType.cs" />
+    <Compile Include="Exception\FPPreviewException.cs" />
     <Compile Include="Parser\AbstractElseParser.cs" />
     <Compile Include="Parser\CellParser.cs" />
     <Compile Include="Parser\CommentParser.cs" />

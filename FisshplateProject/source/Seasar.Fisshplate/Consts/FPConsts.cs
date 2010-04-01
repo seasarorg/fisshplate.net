@@ -47,6 +47,8 @@ namespace Seasar.Fisshplate.Consts
 
         public const string MessageIdNotIteratorInvalidMax = "EFP00008";
 
+        public const string MessageIdPreviewLacckOfParent = "EFP00009";
+
         public const string MessageIdAlreadyExists = "EFP00010";
 
         public const string MessageIdVarDeclarationInvalid = "EFP00011";

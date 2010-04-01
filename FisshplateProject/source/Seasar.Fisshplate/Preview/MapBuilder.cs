@@ -6,6 +6,7 @@ using Seasar.Fisshplate.Wrapper;
 using System.Text.RegularExpressions;
 using Seasar.Fisshplate.Consts;
 using Seasar.Fisshplate.Core;
+using Seasar.Fisshplate.Exception;
 
 namespace Seasar.Fisshplate.Preview
 {
@@ -42,7 +43,7 @@ namespace Seasar.Fisshplate.Preview
         private string GetKeyNameFrom(SheetWrapper sheet)
         {
             String col = sheet.GetRow(0).GetCell(0).StringValue;
-            if (String.IsNullOrEmpty(col) && Regex.Match(FPConsts.RegexBindVar, col).Success)
+            if ((String.IsNullOrEmpty(col) == false) && Regex.Match(col, FPConsts.RegexBindVar).Success)
             {
                 sheet.RemoveRow(0);
                 BindVariable var = new BindVariable(col);
@@ -74,7 +75,7 @@ namespace Seasar.Fisshplate.Preview
             FPMapData parent = grandParent.GetChildByKey(parentKeyName);
             if (parent == null)
             {
-                //TODO throw new FPPreviewException(FPConsts.MessageIdPreviewLacckOfParent, new Object[] { parentKeyName });
+               throw new FPPreviewException(FPConsts.MessageIdPreviewLacckOfParent, new Object[] { parentKeyName });
             }
             BuildMapData(parent, sheet, selfKeyName);
         }

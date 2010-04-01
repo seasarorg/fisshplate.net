@@ -115,6 +115,7 @@ namespace Seasar.Fisshplate.Preview
             {
                 IDictionary<string, object> item = new Dictionary<string, object>();
                 RowWrapper vals = _sheet.GetRow(i);
+                PutValueToMap(item, keys, vals);
                 BuildChildData(item);
                 list.Add(item);
             }
@@ -153,6 +154,7 @@ namespace Seasar.Fisshplate.Preview
 
                 String keyStr = key.StringValue;
                 object valObj = val.ObjectValue;
+
                 data[keyStr] = valObj;
             }
         }
