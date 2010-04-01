@@ -65,5 +65,13 @@ namespace Seasar.Fisshplate.Test.Util
             Assert.AreEqual("__obj__['index']%2==0", exp);
 
         }
+
+        [Test]
+        public void Test_プロパティの場合()
+        {
+            string str = "data.val";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("__obj__['data'].val", exp);
+        }
     }
 }

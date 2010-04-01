@@ -13,6 +13,24 @@ namespace Seasar.Fisshplate.Test.Util
     public class FPPoiUtilTest
     {
         [Test]
+        public void Test_型のチェック()
+        {
+            using (FileStream fs = new FileStream(@"TestResource\Template\Util\FPPoiuUtil.xls", FileMode.Open, FileAccess.Read))
+            {
+                HSSFWorkbook wb = new HSSFWorkbook(fs);
+
+                HSSFSheet sheet = wb.GetSheetAt(0);
+                HSSFRow row1 = sheet.GetRow(0);
+                HSSFRow row2 = sheet.GetRow(1);
+                System.Console.WriteLine(row1.GetCell(2).ToString());
+
+                Assert.AreEqual(new DateTime(2010, 3, 11), FPPoiUtil.GetCellValueAsObject(row1.GetCell(2)));
+
+            }
+        }
+
+
+        [Test]
         public void Test_セルの値のみ比較()
         {
             using (FileStream fs = new FileStream(@"TestResource\Template\Util\FPPoiuUtil.xls", FileMode.Open, FileAccess.Read))

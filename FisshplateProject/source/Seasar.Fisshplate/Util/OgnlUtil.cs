@@ -8,6 +8,8 @@ namespace Seasar.Fisshplate.Util
 {
     public static class OgnlUtil
     {
+        private static readonly String RootObjName = "__obj__";
+
         /// <summary>
         /// Java版と違い、 JScript.NETで式を解決する。
         /// JScript.NETだと"data.title"のような式や "code" のような式が認識出来ない。
@@ -68,7 +70,7 @@ namespace Seasar.Fisshplate.Util
                 return expression;
             }
             //__obj__の場合、予約語なので何もしない。
-            if (expression == "__obj__")
+            if (expression == RootObjName)
             {
                 return expression;
             }
@@ -77,7 +79,7 @@ namespace Seasar.Fisshplate.Util
             Match mat2 = Regex.Match(expression, @"^\s*([^\s\.\[]+)((\.|\[).*)?");
             if (mat2.Success)
             {
-                return "__obj__['" + mat2.Groups[1].Value + "']" + mat2.Groups[2].Value;
+                return RootObjName + "['" + mat2.Groups[1].Value + "']" + mat2.Groups[2].Value;
             }
             throw new ApplicationException("JSciprtで解析出来ない式です。[" + expression + "]");
         }

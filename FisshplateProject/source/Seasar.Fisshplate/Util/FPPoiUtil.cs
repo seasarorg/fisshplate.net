@@ -51,9 +51,7 @@ namespace Seasar.Fisshplate.Util
 
         private static object GetValueFromNumericCell(HSSFCell hssfCell)
         {
-            String str = hssfCell.ToString();
-            // TODO 日付の正規表現は間違えているかも。ToStringも？？
-            if (Regex.Match(str, @"\\d+-.+-\\d+").Success)
+            if (HSSFDateUtil.IsCellDateFormatted(hssfCell))
             {
                 return hssfCell.DateCellValue;
             }
