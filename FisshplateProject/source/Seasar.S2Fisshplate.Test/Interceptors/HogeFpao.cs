@@ -12,13 +12,13 @@ namespace Seasar.S2Fisshplate.Test.Interceptors
     [Aspect(typeof(Seasar.S2Fisshplate.Interceptors.FPQuillInterceptor))]
     public interface HogeFpao
     {
-        [FPTemplate("TemplateS2Fisshplate.xls")]
+        [FPTemplateFile("TemplateS2Fisshplate.xls")]
         HSSFWorkbook GetHogeFisshplate(HogeDto dto);
 
-        [FPTemplate(@"Template\S2FPTemplateTest.xls")]
+        [FPTemplateFile(@"Template\S2FPTemplateTest.xls")]
         HSSFWorkbook GetFolderTemplate(S2TestDto dto);
 
-        [FPTemplate(@"Template\Hoge\S2FPTemplateTest_List.xls")]
+        [FPTemplateFile(@"Template\Hoge\S2FPTemplateTest_List.xls")]
         HSSFWorkbook GetInterceptorIListTest(IList<HogeDto> itemList);
     }
 }
