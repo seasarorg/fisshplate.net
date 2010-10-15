@@ -99,6 +99,7 @@
     <Compile Include="Parser\LinkParserTest.cs" />
     <Compile Include="Parser\PictureParserTest.cs" />
     <Compile Include="Parser\WhileParserTest.cs" />
+    <Compile Include="Parser\FormulaParserTest.cs" />
     <Compile Include="Preview\FPPreviewUtilTest.cs" />
     <Compile Include="Preview\MapBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Template\FPTemplateSyntaxTest.cs" />
     <Compile Include="Template\FPTemplateTest.cs" />
     <Compile Include="Template\TemplateValueTest.cs" />
+    <Compile Include="Template\FPTemplateFormulaTest.cs" />
     <Compile Include="Util\FPPoiUtilTest.cs" />
     <Compile Include="Util\JScriptUtilTest.cs" />
     <Compile Include="Util\OgnlUtilTest.cs" />
@@ -209,6 +211,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestResource\Template\Util\FPPoiuUtil.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResource\Template\FPTemplateFormulaTest.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

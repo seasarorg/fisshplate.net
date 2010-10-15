@@ -83,6 +83,7 @@
     <Compile Include="Core\Element\ElseBlock.cs" />
     <Compile Include="Core\Element\ElseIfBlock.cs" />
     <Compile Include="Core\Element\Exec.cs" />
+    <Compile Include="Core\Element\Formula.cs" />
     <Compile Include="Core\Element\GenericCell.cs" />
     <Compile Include="Core\Element\HorizontalIteratorBlock.cs" />
     <Compile Include="Core\Element\IfBlock.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Parser\ElseIfBlockParser.cs" />
     <Compile Include="Parser\EndParser.cs" />
     <Compile Include="Parser\ExecParser.cs" />
+    <Compile Include="Parser\FormulaParser.cs" />
     <Compile Include="Parser\FPParser.cs" />
     <Compile Include="Parser\Handler\CellParserHandler.cs" />
     <Compile Include="Parser\Handler\RowParserHandler.cs" />

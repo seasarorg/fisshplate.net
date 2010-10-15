@@ -18,7 +18,8 @@ namespace Seasar.Fisshplate.Parser.Handler
         private static CellParser[] _buildInCellParser = 
         {
             new PictureParser(),
-            new LinkParser()
+            new LinkParser(),
+            //new FormulaParser(),
         };
 
         public TemplateElement GetElement(CellWrapper templateCell)

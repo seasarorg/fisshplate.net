@@ -73,5 +73,28 @@ namespace Seasar.Fisshplate.Test.Util
             string exp = OgnlUtil.ToEvalFormula(str);
             Assert.AreEqual("__obj__['data'].val", exp);
         }
+
+        [Test]
+        public void Test_文字列中の何かの場合()
+        {
+            string str = "'hoge'";
+            string exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("'hoge'", exp);
+
+            str = "\"h\\\"oge\"";
+            exp = OgnlUtil.ToEvalFormula(str);
+            Assert.AreEqual("\"h\\\"oge\"", exp);
+
+            System.Console.WriteLine(exp);
+        }
+
+        [Test]
+        public void Test_値のセット()
+        {
+            IDictionary<String, object> data = new Dictionary<String, object>();
+
+            data["template"] = "";
+            JScriptUtil.Evaluate("__obj__['template']='D1+D2+D3'", data);
+        }
     }
 }

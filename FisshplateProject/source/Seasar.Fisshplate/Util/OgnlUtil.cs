@@ -30,7 +30,6 @@ namespace Seasar.Fisshplate.Util
             try
             {
                 string expr = ToEvalFormula(expression);
-
                 return JScriptUtil.Evaluate(expr, data);
             }
             catch (System.Exception e)
@@ -100,38 +99,177 @@ namespace Seasar.Fisshplate.Util
         {
             expression = expression.Replace(" ", "");
 
-            Regex varPat = new Regex(@"[^\+\-\*/%(\)&|\=\!><\[\]]*");
-            MatchCollection matCol = varPat.Matches(expression);
-            string exp = String.Empty;
-
-            int idx = 0;
-            foreach (Match mat in matCol)
+            const char DEFAULT_MODE = '0';
+            const char SINGLE_QUOTATION = '1';
+            const char DOUBLE_QUOTATION = '3';
+            const char ESCAPE_SINGLE_QUOTATION = '2';
+            const char ESCAPE_DOUBE_QUOTATION = '4';
+            const char TERM_MODE = '5';
+            var mode = DEFAULT_MODE;
+            var st = 0;
+            var evaledExpr = "";
+            //文字列を1字ずつ字句解析する。
+            for (int i = 0; i < expression.Length; i++)
             {
-                String varExp = mat.Value;
-                exp += expression.Substring(idx, mat.Index - idx);
-                if (mat.Value.Trim().StartsWith(".") == false || mat.Value.Trim().Length != 0)
+                var expCh = expression[i];
+                //シングルクォーテーションの場合
+                if (expCh == '\'')
                 {
-                    varExp = ToEvalExpr(mat.Value);
+                    if (mode == DEFAULT_MODE) // 空の状態
+                    {
+                        //文字列開始(Single)
+                        mode = SINGLE_QUOTATION;
+                        //開始位置記憶
+                        st = i;
+                    }
+                    else if (mode == SINGLE_QUOTATION) //シングルクォーテーションの途中
+                    {
+                        // 文字列終了。解析終了文字列に足しこみ
+                        evaledExpr += expression.Substring(st, i + 1 - st);
+                        mode = DEFAULT_MODE;
+                    }
+                    else if (mode == ESCAPE_SINGLE_QUOTATION) //エスケープ対象
+                    {
+                        mode = SINGLE_QUOTATION;
+                    }
+                    else
+                    {
+                        throw new ApplicationException("式の解析中にエラーが発生しました(')");
+                    }
                 }
-                exp += varExp;
-                idx = mat.Index + mat.Length;
+                else if (expCh == '\"')
+                {
+                    if (mode == DEFAULT_MODE) // 空の状態
+                    {
+                        //文字列開始(Double)
+                        mode = DOUBLE_QUOTATION;
+                        //開始位置記憶
+                        st = i;
+                    }
+                    else if (mode == DOUBLE_QUOTATION) //ダブルクォーテーションの途中
+                    {
+                        // 文字列終了。解析終了文字列に足しこみ
+                        evaledExpr += expression.Substring(st, i + 1 - st);
+                        mode = '0';
+                    }
+                    else if (mode == ESCAPE_DOUBE_QUOTATION) //エスケープ対象
+                    {
+                        mode = DOUBLE_QUOTATION;
+                    }
+                }
+                else if (expCh == '\\')
+                {
+                    if (mode == SINGLE_QUOTATION)
+                    {
+                        mode = ESCAPE_SINGLE_QUOTATION;
+                    }
+                    else if (mode == DOUBLE_QUOTATION)
+                    {
+                        mode = ESCAPE_DOUBE_QUOTATION;
+                    }
+                    else
+                    {
+                        throw new ApplicationException("式の解析中にエラーが発生しました(\\)");
+                    }
+                }
+                else
+                {
+                    if (expCh == '+' || expCh == '-' || expCh == '*' || expCh == '/' ||
+                        expCh == '(' || expCh == ')' || expCh == '[' || expCh == ']' ||
+                        expCh == '&' || expCh == '|' || expCh == '=' || expCh == '!' ||
+                        expCh == '>' || expCh == '<' || expCh == '%')
+                    {
+                        if (mode == SINGLE_QUOTATION || mode == DOUBLE_QUOTATION)
+                        {
+                            //Do Nothing
+                        }
+                        else if (mode == ESCAPE_SINGLE_QUOTATION || mode == ESCAPE_DOUBE_QUOTATION)
+                        {
+                            throw new ApplicationException("式の解析中にエラーが発生しました()");
+                        }
+                        else if (mode == TERM_MODE) //項が確定
+                        {
+                            var ex = expression.Substring(st, i - st);
+                            evaledExpr += ToEvalExpr(ex);
+                            evaledExpr += expCh;
+                            mode = DEFAULT_MODE;
+                        }
+                        else
+                        {
+                            //そのまま足す
+                            evaledExpr += expCh;
+                        }
+                    }
+                    else
+                    {
+                        if (mode == DEFAULT_MODE) //項の開始
+                        {
+                            st = i;
+                            mode = TERM_MODE;
+                        }
+                        else if (mode == SINGLE_QUOTATION || mode == DOUBLE_QUOTATION)
+                        {
+                            // Do Nothing
+                        }
+                        else if (mode == ESCAPE_SINGLE_QUOTATION || mode == ESCAPE_DOUBE_QUOTATION)
+                        {
+                            throw new ApplicationException("式の解析中にエラーが発生しました()");
+                        }
+                        //通常文字
+                        else if (mode == TERM_MODE) // 項の途中
+                        {
+                            // Do Nothing
+                        }
+                    }
+                }
+                //TODO シングルクォーテーションの場合
+                //   1 : 空の状態だったら、文字列開始
+                //   2 : シングルクォーテーションの途中だったら、文字列終了
+                //   3 : 文字列中の\の後だったら、エスケープ対象
+                //TODO ダブルクォーテーションの場合
+                //   1 : 空の状態だったら、文字列開始
+                //   2 : ダブルクォーテーションの途中だったら、文字列終了
+                //   3 : 文字列中の\の後だったら、エスケープ対象
+                //TODO \の場合
+                //   文字列中だったら、エスケープ対象
+                //   それ以外だったら、エラー
+                //TODO +-*/%()&|=!><[] の場合
+                //   文字列中だったら、スルー
+                //   それ以外だったら演算子なので、一つ前までが解析対象
             }
-            if (idx < expression.Length)
+            //終了後、項の途中だったら最後に足し込む
+            if (mode == TERM_MODE)
             {
-                exp += expression.Substring(idx);
+                var ex = expression.Substring(st);
+                evaledExpr += ToEvalExpr(ex);
             }
-            return exp;
+     
+            return evaledExpr;
+            //expression = expression.Replace(" ", "");
+            //System.Console.WriteLine(expression);
+            ////''や""で全てが囲まれていた場合は文字列とみなして何もしない。
+            //if (expression[0] == '\'' && expression[expression.Length - 1] == '\'')
+            //{
+            //    return expression;
+            //}
+            //if (expression[0] == '"' && expression[expression.Length - 1] == '"')
+            //{
+            //    return expression;
+            //}
 
-            //Regex _varPat = new Regex(@"[^\s\+\-\(\)&|\=\!/%><\*,0-9]{1}[^\s\+\-\(\)&|\=\!/%><\*]*");
-            //MatchCollection matCol = _varPat.Matches(expression);
-
+            //Regex varPat = new Regex(@"[^\+\-\*/%(\)&|\=\!><\[\]]*");
+            //MatchCollection matCol = varPat.Matches(expression);
             //string exp = String.Empty;
 
             //int idx = 0;
             //foreach (Match mat in matCol)
             //{
+            //    String varExp = mat.Value;
             //    exp += expression.Substring(idx, mat.Index - idx);
-            //    string varExp = ToEvalExpr(mat.Value);
+            //    if (mat.Value.Trim().StartsWith(".") == false || mat.Value.Trim().Length != 0)
+            //    {
+            //        varExp = ToEvalExpr(mat.Value);
+            //    }
             //    exp += varExp;
             //    idx = mat.Index + mat.Length;
             //}
