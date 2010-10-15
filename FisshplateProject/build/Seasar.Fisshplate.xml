@@ -13,61 +13,14 @@
             <returns></returns>
             <exception cref="T:Seasar.Fisshplate.Exception.FPParseException"></exception>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.AbstractElseParser.GetPattern">
+        <member name="M:Seasar.Fisshplate.Exception.FPException.#ctor(System.String,System.Object[],Seasar.Fisshplate.Wrapper.RowWrapper,System.Exception)">
             <summary>
-            解析対象か否かの判定に使うRegexを戻します。
+            リソースバンドルのキーを受け取って例外をラップします。
             </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Seasar.Fisshplate.Core.Element.TemplateElement">
-            <summary>
-            テンプレートの各要素を反映するインターフェースです。
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.TemplateElement.Merge(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            コンテキストに格納されたデータをテンプレートに埋め込みます。
-            </summary>
-            <param name="context">コンテキスト</param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">データ埋め込み時にエラーが発生した際に投げられます。</exception>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.AbstractBlock.AddChild(Seasar.Fisshplate.Core.Element.TemplateElement)">
-            <summary>
-            ブロック内の子要素を追加します。
-            </summary>
-            <param name="element"></param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.AbstractBlock.MergeChildren(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            子要素にデータを埋め込みます
-            </summary>
-            <param name="context">コンテキスト</param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">データ埋め込み時にエラーが発生した際に投げられます。</exception>
-        </member>
-        <member name="P:Seasar.Fisshplate.Core.Element.AbstractBlock.ChildList">
-            <summary>
-            ブロック内の子要素のリスト
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.IteratorBlock.#ctor(Seasar.Fisshplate.Wrapper.RowWrapper,System.String,System.String,System.String,System.Int32)">
-            <summary>
-            要素を保持する変数名とイテレータ自身の名前とループのインデックス名とループの最大繰り返し回数を受け取ります。
-            </summary>
-            <param name="row">テンプレート上の行</param>
-            <param name="varName">イテレータ内の要素を保持する変数名</param>
-            <param name="iteratorName">イテレータ名</param>
-            <param name="indexName">ループのインデックス名</param>
-            <param name="max">ループの最大繰り返し回数</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.IteratorBlock.InitLineNumPerPage">
-            <summary>
-            現在のページごとの行番号を初期化します。
-            </summary>
-        </member>
-        <member name="P:Seasar.Fisshplate.Core.Element.IteratorBlock.LineNumPerPage">
-            <summary>
-            現在のページごとの行番号
-            </summary>
+            <param name="messageId"></param>
+            <param name="args"></param>
+            <param name="row"></param>
+            <param name="ex"></param>
         </member>
         <member name="T:Seasar.Fisshplate.EFPMessages">
             <summary>
@@ -155,104 +108,17 @@
               attribute of #picture is invalid. this is valid before merge data, so you should confirm the bind variable if you use is. evaluated value is &quot;{0}&quot;.(row no. {1}) に類似しているローカライズされた文字列を検索します。
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.IfBlock.#ctor(System.String)">
+        <member name="T:Seasar.Fisshplate.Core.Element.TemplateElement">
             <summary>
-            
-            </summary>
-            <param name="condition">条件式</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.IfBlock.SetNextBlock(Seasar.Fisshplate.Core.Element.AbstractBlock)">
-            <summary>
-            次の条件のブロック要素を設定します。
-            具体的には、ElseIfBlockかElseBlockになります。
-            </summary>
-            <param name="next">次の条件のブロックを保持する要素。</param>
-        </member>
-        <member name="P:Seasar.Fisshplate.Core.Element.IfBlock.NextBlock">
-            <summary>
-            次の条件のブロック要素
+            テンプレートの各要素を反映するインターフェースです。
             </summary>
         </member>
-        <member name="T:Seasar.Fisshplate.Context.PageContext">
+        <member name="M:Seasar.Fisshplate.Core.Element.TemplateElement.Merge(Seasar.Fisshplate.Context.FPContext)">
             <summary>
-            シート単位の値を保管しています。
+            コンテキストに格納されたデータをテンプレートに埋め込みます。
             </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Context.PageContext.AddPageNum">
-            <summary>
-            ページ番号を加算します
-            </summary>
-        </member>
-        <member name="P:Seasar.Fisshplate.Context.PageContext.PageNum">
-            <summary>
-            ページ番号
-            </summary>
-        </member>
-        <member name="T:Seasar.Fisshplate.Exception.FPParseException">
-            <summary>
-            テンプレート解析時に投げられる例外クラスです。
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Exception.FPException.#ctor(System.String,System.Object[],Seasar.Fisshplate.Wrapper.RowWrapper,System.Exception)">
-            <summary>
-            リソースバンドルのキーを受け取って例外をラップします。
-            </summary>
-            <param name="messageId"></param>
-            <param name="args"></param>
-            <param name="row"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Util.OgnlUtil.GetValue(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            Java版と違い、 JScript.NETで式を解決する。
-            JScript.NETだと"data.title"のような式や "code" のような式が認識出来ない。
-            "code" -> "__obj__['code']
-            "data.title.hoge -> "__obj__['data'].title.hoge
-            "__obj__.title" -> "__obj__['__obj__'].title
-            に変換してJSciprtでevalを行う。
-            </summary>
-            <param name="expression"></param>
-            <param name="data"></param>
-            <remarks>内部変数として、「__obj__」を利用します。
-            「__obj__」を変数として利用したい場合は、<code>__obj__['__obj__']</code>と記述してください。
-            ただし、変数名やプロパティ名として「__obj__」を利用することはオススメしません。
-            </remarks>
-            <returns></returns>
-        </member>
-        <member name="M:Seasar.Fisshplate.Util.OgnlUtil.DeclareVar(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
-            <summary>
-            変数宣言用に置換してから処理を行う。
-            </summary>
-            <param name="expression"></param>
-            <param name="data"></param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.EndParser.GetIfBlockFromStack(Seasar.Fisshplate.Parser.FPParser)">
-            <summary>
-            Else If か Elseの場合、元になるIfが出るまで継続してPopする。
-            </summary>
-            <param name="parser"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Seasar.Fisshplate.Core.Element.Suspend">
-            <summary>
-            テンプレートのセルの値にバインド変数が含まれる場合の要素クラスです。
-            JScriptで評価します。
-            評価は即時にはされず、Resumeクラスによって評価されます。
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.Suspend.Merge(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.Suspend.Resume(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
+            <param name="context">コンテキスト</param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">データ埋め込み時にエラーが発生した際に投げられます。</exception>
         </member>
         <member name="M:Seasar.Fisshplate.Core.Element.Root.AddBody(Seasar.Fisshplate.Core.Element.TemplateElement)">
             <summary>
@@ -275,101 +141,49 @@
             ボディ要素のリストを戻します
             </summary>
         </member>
-        <member name="T:Seasar.Fisshplate.Util.EnumeratorUtil">
+        <member name="T:Seasar.Fisshplate.Preview.MapBuilder">
             <summary>
-            繰り返し処理を行うクラスに共通するユーティリティクラスです。
+            EXCELからテンプレートに埋め込むDictionaryを生成するクラスです。
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Util.EnumeratorUtil.GetEnumerator(System.Object,System.String,Seasar.Fisshplate.Wrapper.RowWrapper)">
+        <member name="T:Seasar.Fisshplate.Core.Element.Suspend">
+            <summary>
+            テンプレートのセルの値にバインド変数が含まれる場合の要素クラスです。
+            JScriptで評価します。
+            評価は即時にはされず、Resumeクラスによって評価されます。
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.Suspend.Merge(Seasar.Fisshplate.Context.FPContext)">
             <summary>
             
             </summary>
-            <param name="o">配列もしくはリスト</param>
-            <param name="iteratorName">イテレータの名前（エラー表示用）</param>
-            <param name="row">行ラッパクラス（エラー表示用）</param>
-            <returns></returns>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">第1引数がEnumeratorを持たないクラスだった場合に投げられます。</exception>
+            <param name="context"></param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
         </member>
-        <member name="T:Seasar.Fisshplate.Parser.CellParser">
-            <summary>
-            セル単位のタグから各要素を解析するインタフェースです。
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.CellParser.GetElement(Seasar.Fisshplate.Wrapper.CellWrapper,System.String)">
-            <summary>
-            セルの内容を解析し、このパーサに合致した場合はそれに紐つくTemplateElementを実装したクラスを戻します。
-            合致しない場合はnullを戻します。
-            </summary>
-            <param name="cell">解析対象セル</param>
-            <param name="value">解析対象セルの値</param>
-            <returns>紐ついた要素クラス</returns>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.#ctor">
-            <summary>
-            コンストラクタ
-            </summary>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.Parse(Seasar.Fisshplate.Wrapper.SheetWrapper)">
+        <member name="M:Seasar.Fisshplate.Core.Element.Suspend.Resume(Seasar.Fisshplate.Context.FPContext)">
             <summary>
             
             </summary>
-            <param name="sheet"></param>
-            <returns></returns>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException"></exception>
+            <param name="context"></param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddRowParser(Seasar.Fisshplate.Parser.RowParser)">
+        <member name="M:Seasar.Fisshplate.Core.Element.AbstractBlock.AddChild(Seasar.Fisshplate.Core.Element.TemplateElement)">
             <summary>
-            独自にカスタマイズした行単位のパーサーを追加します。
+            ブロック内の子要素を追加します。
             </summary>
-            <param name="rowParser">追加するパーサー</param>
+            <param name="element"></param>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.ParseRow(Seasar.Fisshplate.Wrapper.RowWrapper)">
+        <member name="M:Seasar.Fisshplate.Core.Element.AbstractBlock.MergeChildren(Seasar.Fisshplate.Context.FPContext)">
             <summary>
-            
+            子要素にデータを埋め込みます
             </summary>
-            <param name="row"></param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException"></exception>
+            <param name="context">コンテキスト</param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">データ埋め込み時にエラーが発生した際に投げられます。</exception>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddBlockElement(Seasar.Fisshplate.Core.Element.AbstractBlock)">
+        <member name="P:Seasar.Fisshplate.Core.Element.AbstractBlock.ChildList">
             <summary>
-            ブロック要素に親要素がある場合、その親要素にブロック要素を子要素として追加します。
+            ブロック内の子要素のリスト
             </summary>
-            <param name="block">ブロック要素</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.PushBlockToStack(Seasar.Fisshplate.Core.Element.AbstractBlock)">
-            <summary>
-            ブロックの閉じ判定用スタックにブロック要素を追加します。
-            </summary>
-            <param name="block">ブロック要素</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddTemplateElement(Seasar.Fisshplate.Core.Element.TemplateElement)">
-            <summary>
-            要素を親要素があれば子要素として追加します。親要素がなければルートにボディ要素として追加します。
-            </summary>
-            <param name="elem">要素</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.IsBlockStackBlank">
-            <summary>
-            ブロックの閉じ判定用スタックが空か否かを戻します。
-            </summary>
-            <returns>空ならばtrue。</returns>
-        </member>
-        <member name="M:Seasar.Fisshplate.Parser.FPParser.PopFromBlockStack">
-            <summary>
-            ブロックの閉じ判定用スタックからポップします。
-            </summary>
-            <returns>ブロック要素</returns>
-        </member>
-        <member name="P:Seasar.Fisshplate.Parser.FPParser.Root">
-            <summary>
-            ルートの要素リストを戻します。
-            </summary>
-        </member>
-        <member name="P:Seasar.Fisshplate.Parser.FPParser.LastElementFromStack">
-            <summary>
-            ブロックの閉じ判定用スタックから最後の要素を取得して戻します。 
-            </summary>
-            <returns>最後の要素</returns>
         </member>
         <member name="M:Seasar.Fisshplate.Context.FPContext.#ctor(NPOI.HSSF.UserModel.HSSFSheet,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
@@ -469,46 +283,19 @@
             保留リストを戻します。
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Util.FPPoiUtil.GetCellValueAsObject(NPOI.HSSF.UserModel.HSSFCell)">
+        <member name="T:Seasar.Fisshplate.Parser.CellParser">
             <summary>
-            セルの書式設定に基づいてセルの値を戻します。
-            </summary>
-            <param name="hssfCell"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Seasar.Fisshplate.Core.Element.El">
-            <summary>
-            テンプレートのセルの値にバインド変数が含まれる場合の要素クラスです。OGNLで評価します。
+            セル単位のタグから各要素を解析するインタフェースです。
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.El.#ctor(Seasar.Fisshplate.Core.Element.AbstractCell)">
+        <member name="M:Seasar.Fisshplate.Parser.CellParser.GetElement(Seasar.Fisshplate.Wrapper.CellWrapper,System.String)">
             <summary>
-            コンストラクタ
+            セルの内容を解析し、このパーサに合致した場合はそれに紐つくTemplateElementを実装したクラスを戻します。
+            合致しない場合はnullを戻します。
             </summary>
-            <param name="target">バインド変数を評価する対象となるセル要素</param>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.El.GetBoundValue(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.El.PutValueToMap(Seasar.Fisshplate.Context.FPContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
-        </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.El.GetNullValue(Seasar.Fisshplate.Core.BindVariable)">
-            <summary>
-            
-            </summary>
-            <param name="bindVar"></param>
-            <returns></returns>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
+            <param name="cell">解析対象セル</param>
+            <param name="value">解析対象セルの値</param>
+            <returns>紐ついた要素クラス</returns>
         </member>
         <member name="T:Seasar.Fisshplate.Core.Element.AbstractCell">
             <summary>
@@ -541,10 +328,47 @@
             <param name="context">コンテキスト</param>
             <param name="outCell">出力するセル</param>
         </member>
-        <member name="T:Seasar.Fisshplate.Core.Element.GenericCell">
+        <member name="M:Seasar.Fisshplate.Preview.FPPreviewUtil.GetWorkbook(NPOI.HSSF.UserModel.HSSFWorkbook,NPOI.HSSF.UserModel.HSSFWorkbook)">
             <summary>
-            値を持つ通常のセルの情報を保持する要素クラスです。
+            テンプレートファイルにデータファイル内のデータを埋め込んだ出力ファイルを戻します。
             </summary>
+            <param name="template">テンプレート用ファイル</param>
+            <param name="data">データ用ファイル</param>
+            <exception cref="!:">FPException</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPPreviewUtil.GetWorkbook(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            テンプレートファイルのストリームと、データ用ファイルのストリームから出力ファイルを生成して戻します。
+            </summary>
+            <param name="template">テンプレート用ストリーム</param>
+            <param name="data">データ用ストリーム</param>
+            <returns>データを埋め込んだワークブック</returns>
+            <exception cref="!:">FPException</exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.IfBlock.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="condition">条件式</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.IfBlock.SetNextBlock(Seasar.Fisshplate.Core.Element.AbstractBlock)">
+            <summary>
+            次の条件のブロック要素を設定します。
+            具体的には、ElseIfBlockかElseBlockになります。
+            </summary>
+            <param name="next">次の条件のブロックを保持する要素。</param>
+        </member>
+        <member name="P:Seasar.Fisshplate.Core.Element.IfBlock.NextBlock">
+            <summary>
+            次の条件のブロック要素
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.AbstractElseParser.GetPattern">
+            <summary>
+            解析対象か否かの判定に使うRegexを戻します。
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Seasar.Fisshplate.Core.BindVariable">
             <summary>
@@ -586,13 +410,228 @@
             </summary>
             <param name="rowParser"></param>
         </member>
-        <member name="M:Seasar.Fisshplate.Core.Element.Row.#ctor(Seasar.Fisshplate.Wrapper.RowWrapper,Seasar.Fisshplate.Core.Element.Root,Seasar.Fisshplate.Parser.Handler.CellParserHandler)">
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.#ctor">
             <summary>
-            コンストラクタです。テンプレート側の行オブジェクトを受け取り、その行内のセル情報を解析して保持します。
+            コンストラクタ
             </summary>
-            <param name="templateRow">テンプレート側の行オブジェクト</param>
-            <param name="root">自分自身が属してるルート要素クラス</param>
-            <param name="cellParserHandler">セルを解析するクラス</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.Parse(Seasar.Fisshplate.Wrapper.SheetWrapper)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <returns></returns>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException"></exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddRowParser(Seasar.Fisshplate.Parser.RowParser)">
+            <summary>
+            独自にカスタマイズした行単位のパーサーを追加します。
+            </summary>
+            <param name="rowParser">追加するパーサー</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.ParseRow(Seasar.Fisshplate.Wrapper.RowWrapper)">
+            <summary>
+            
+            </summary>
+            <param name="row"></param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException"></exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddBlockElement(Seasar.Fisshplate.Core.Element.AbstractBlock)">
+            <summary>
+            ブロック要素に親要素がある場合、その親要素にブロック要素を子要素として追加します。
+            </summary>
+            <param name="block">ブロック要素</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.PushBlockToStack(Seasar.Fisshplate.Core.Element.AbstractBlock)">
+            <summary>
+            ブロックの閉じ判定用スタックにブロック要素を追加します。
+            </summary>
+            <param name="block">ブロック要素</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.AddTemplateElement(Seasar.Fisshplate.Core.Element.TemplateElement)">
+            <summary>
+            要素を親要素があれば子要素として追加します。親要素がなければルートにボディ要素として追加します。
+            </summary>
+            <param name="elem">要素</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.IsBlockStackBlank">
+            <summary>
+            ブロックの閉じ判定用スタックが空か否かを戻します。
+            </summary>
+            <returns>空ならばtrue。</returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.FPParser.PopFromBlockStack">
+            <summary>
+            ブロックの閉じ判定用スタックからポップします。
+            </summary>
+            <returns>ブロック要素</returns>
+        </member>
+        <member name="P:Seasar.Fisshplate.Parser.FPParser.Root">
+            <summary>
+            ルートの要素リストを戻します。
+            </summary>
+        </member>
+        <member name="P:Seasar.Fisshplate.Parser.FPParser.LastElementFromStack">
+            <summary>
+            ブロックの閉じ判定用スタックから最後の要素を取得して戻します。 
+            </summary>
+            <returns>最後の要素</returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.IteratorBlock.#ctor(Seasar.Fisshplate.Wrapper.RowWrapper,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            要素を保持する変数名とイテレータ自身の名前とループのインデックス名とループの最大繰り返し回数を受け取ります。
+            </summary>
+            <param name="row">テンプレート上の行</param>
+            <param name="varName">イテレータ内の要素を保持する変数名</param>
+            <param name="iteratorName">イテレータ名</param>
+            <param name="indexName">ループのインデックス名</param>
+            <param name="max">ループの最大繰り返し回数</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.IteratorBlock.InitLineNumPerPage">
+            <summary>
+            現在のページごとの行番号を初期化します。
+            </summary>
+        </member>
+        <member name="P:Seasar.Fisshplate.Core.Element.IteratorBlock.LineNumPerPage">
+            <summary>
+            現在のページごとの行番号
+            </summary>
+        </member>
+        <member name="T:Seasar.Fisshplate.Core.Element.El">
+            <summary>
+            テンプレートのセルの値にバインド変数が含まれる場合の要素クラスです。OGNLで評価します。
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.El.#ctor(Seasar.Fisshplate.Core.Element.AbstractCell)">
+            <summary>
+            コンストラクタ
+            </summary>
+            <param name="target">バインド変数を評価する対象となるセル要素</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.El.GetBoundValue(Seasar.Fisshplate.Context.FPContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.El.PutValueToMap(Seasar.Fisshplate.Context.FPContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Core.Element.El.GetNullValue(Seasar.Fisshplate.Core.BindVariable)">
+            <summary>
+            
+            </summary>
+            <param name="bindVar"></param>
+            <returns></returns>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException"></exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.OgnlUtil.GetValue(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Java版と違い、 JScript.NETで式を解決する。
+            JScript.NETだと"data.title"のような式や "code" のような式が認識出来ない。
+            "code" -> "__obj__['code']
+            "data.title.hoge -> "__obj__['data'].title.hoge
+            "__obj__.title" -> "__obj__['__obj__'].title
+            に変換してJSciprtでevalを行う。
+            </summary>
+            <param name="expression"></param>
+            <param name="data"></param>
+            <remarks>内部変数として、「__obj__」を利用します。
+            「__obj__」を変数として利用したい場合は、<code>__obj__['__obj__']</code>と記述してください。
+            ただし、変数名やプロパティ名として「__obj__」を利用することはオススメしません。
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.OgnlUtil.DeclareVar(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            変数宣言用に置換してから処理を行う。
+            </summary>
+            <param name="expression"></param>
+            <param name="data"></param>
+        </member>
+        <member name="T:Seasar.Fisshplate.Util.EnumeratorUtil">
+            <summary>
+            繰り返し処理を行うクラスに共通するユーティリティクラスです。
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.EnumeratorUtil.GetEnumerator(System.Object,System.String,Seasar.Fisshplate.Wrapper.RowWrapper)">
+            <summary>
+            
+            </summary>
+            <param name="o">配列もしくはリスト</param>
+            <param name="iteratorName">イテレータの名前（エラー表示用）</param>
+            <param name="row">行ラッパクラス（エラー表示用）</param>
+            <returns></returns>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPMergeException">第1引数がEnumeratorを持たないクラスだった場合に投げられます。</exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.EndParser.GetIfBlockFromStack(Seasar.Fisshplate.Parser.FPParser)">
+            <summary>
+            Else If か Elseの場合、元になるIfが出るまで継続してPopする。
+            </summary>
+            <param name="parser"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Seasar.Fisshplate.Exception.FPParseException">
+            <summary>
+            テンプレート解析時に投げられる例外クラスです。
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.FPPoiUtil.GetCellValueAsObject(NPOI.HSSF.UserModel.HSSFCell)">
+            <summary>
+            セルの書式設定に基づいてセルの値を戻します。
+            </summary>
+            <param name="hssfCell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.FPPoiUtil.IsSameCell(NPOI.HSSF.UserModel.HSSFCell,NPOI.HSSF.UserModel.HSSFCell)">
+            <summary>
+            セルの書式・スタイル・座標・値などが同一かどうか
+            </summary>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Util.FPPoiUtil.IsSameCellValue(NPOI.HSSF.UserModel.HSSFCell,NPOI.HSSF.UserModel.HSSFCell)">
+            <summary>
+            セルの値が同一かどうか
+            </summary>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Wrapper.SheetWrapper.PrepareForMerge">
+            <summary>
+            データ埋め込み準備のために、シートを初期化します
+            </summary>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.Handler.RowParserHandler.AddRowParser(Seasar.Fisshplate.Parser.RowParser)">
+            <summary>
+            独自にカスタマイズしたパーサを追加します。
+            </summary>
+            <param name="parser"></param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Parser.Handler.RowParserHandler.Parse(Seasar.Fisshplate.Wrapper.CellWrapper,Seasar.Fisshplate.Parser.FPParser)">
+            <summary>
+            自身に登録されたRowParserを使ってcellを解析します。
+            解析対象であればTemplateElementを生成し、
+            呼び出し元FPParserに追加してtrueを戻します。
+            解析対象外であれば、falseを戻します。
+            </summary>
+            <param name="cell">パースするセル</param>
+            <param name="fPParser">呼び出し元FPParser</param>
+            <returns>パース対象であればtrue</returns>
+            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException">解析時にエラーが発生した際に投げられます。 </exception>
+        </member>
+        <member name="T:Seasar.Fisshplate.Core.Element.GenericCell">
+            <summary>
+            値を持つ通常のセルの情報を保持する要素クラスです。
+            </summary>
         </member>
         <member name="T:Seasar.Fisshplate.Consts.FPConsts">
             <summary>
@@ -624,28 +663,81 @@
             埋込みデータのNULL制御演算子
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Wrapper.SheetWrapper.PrepareForMerge">
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.#ctor(Seasar.Fisshplate.Wrapper.SheetWrapper,System.String)">
             <summary>
-            データ埋め込み準備のために、シートを初期化します
+            コンストラクタ
+            </summary>
+            <param name="sheet">シート</param>
+            <param name="keyName">テンプレートから参照するキー文字列</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.AddChild(Seasar.Fisshplate.Wrapper.SheetWrapper,System.String)">
+            <summary>
+            子要素を追加します。
+            </summary>
+            <param name="sheet">子要素データが記載されたシート</param>
+            <param name="keyName">子要素をテンプレートから参照するキー文字列</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.BuildData">
+            <summary>
+            埋め込み用データを生成します。
+            複数行の場合はDictionaryのListを戻します。
+            ヘッダ行に「empty list」と書いてある場合は、0件のListを戻します。
+            </summary>
+            <returns>埋め込み用データ</returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.BuildMapData">
+            <summary>
+            Dictionaryとして埋込みデータを生成します。
+            </summary>
+            <returns>埋込みデータ</returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.BuildListData">
+            <summary>
+            DictionaryのListとして埋込みデータを生成します。
+            </summary>
+            <returns>埋め込みデータ</returns>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.BuildChildData(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            このデータが保持する子要素の埋め込みデータを生成します。
+            </summary>
+            <param name="data">子要素データを追加するDictionary</param>
+        </member>
+        <member name="M:Seasar.Fisshplate.Preview.FPMapData.PutValueToMap(System.Collections.Generic.IDictionary{System.String,System.Object},Seasar.Fisshplate.Wrapper.RowWrapper,Seasar.Fisshplate.Wrapper.RowWrapper)">
+            <summary>
+            埋め込み用データが記載されたExcelシートからDictionaryにデータを追加します。
+            </summary>
+            <param name="data">埋め込みデータ用Dictionary</param>
+            <param name="keys">キーとなる行</param>
+            <param name="vals">値となる行</param>
+        </member>
+        <member name="P:Seasar.Fisshplate.Preview.FPMapData.KeyName">
+            <summary>
+            このデータをテンプレートから参照するキー文字列
             </summary>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.Handler.RowParserHandler.AddRowParser(Seasar.Fisshplate.Parser.RowParser)">
+        <member name="M:Seasar.Fisshplate.Core.Element.Row.#ctor(Seasar.Fisshplate.Wrapper.RowWrapper,Seasar.Fisshplate.Core.Element.Root,Seasar.Fisshplate.Parser.Handler.CellParserHandler)">
             <summary>
-            独自にカスタマイズしたパーサを追加します。
+            コンストラクタです。テンプレート側の行オブジェクトを受け取り、その行内のセル情報を解析して保持します。
             </summary>
-            <param name="parser"></param>
+            <param name="templateRow">テンプレート側の行オブジェクト</param>
+            <param name="root">自分自身が属してるルート要素クラス</param>
+            <param name="cellParserHandler">セルを解析するクラス</param>
         </member>
-        <member name="M:Seasar.Fisshplate.Parser.Handler.RowParserHandler.Parse(Seasar.Fisshplate.Wrapper.CellWrapper,Seasar.Fisshplate.Parser.FPParser)">
+        <member name="T:Seasar.Fisshplate.Context.PageContext">
             <summary>
-            自身に登録されたRowParserを使ってcellを解析します。
-            解析対象であればTemplateElementを生成し、
-            呼び出し元FPParserに追加してtrueを戻します。
-            解析対象外であれば、falseを戻します。
+            シート単位の値を保管しています。
             </summary>
-            <param name="cell">パースするセル</param>
-            <param name="fPParser">呼び出し元FPParser</param>
-            <returns>パース対象であればtrue</returns>
-            <exception cref="T:Seasar.Fisshplate.Exception.FPParseException">解析時にエラーが発生した際に投げられます。 </exception>
+        </member>
+        <member name="M:Seasar.Fisshplate.Context.PageContext.AddPageNum">
+            <summary>
+            ページ番号を加算します
+            </summary>
+        </member>
+        <member name="P:Seasar.Fisshplate.Context.PageContext.PageNum">
+            <summary>
+            ページ番号
+            </summary>
         </member>
     </members>
 </doc>
