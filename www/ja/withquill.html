@@ -126,8 +126,9 @@ public class TestFisshplateDto
 	<li>引数は1つにして下さい。引数が複数の場合、第1引数のみが埋め込み用データとして扱われ、他は無視されます。</li>
 	<li>
 		メソッドには次の属性をつけて下さい。パラメータには、テンプレートファイルへのパスを記述します。
+		<div class="important">※0.1.1からFPTemplateFileに変更になりました！ 0.1.0までのFPTemplateはdeprecatedになります。</div>
 		<ul>
-			<li>[[FPTemplate(string Path)]]</li>
+			<li>[[FPTemplateFile(string Path)]]</li>
 		</ul>
 	</li>
 </ul>
@@ -136,7 +137,7 @@ public class TestFisshplateDto
 [Aspect(typeof(Seasar.S2Fisshplate.Interceptors.FPQuillInterceptor))]
 public interface TestFisshplate
 {
-  [[FPTemplate(@"Template\FPSample.xls")]]
+  [[FPTemplateFile(@"Template\FPSample.xls")]]
   HSSFWorkbook GetTestWb(TestFisshplateDto dto);
 }
 </pre></div>

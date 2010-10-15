@@ -3,3 +3,7 @@ table.list tr.c {
 	border: 0px;
 	margin: 0px;
 }
+.important {
+	color: red;
+	font-weight: bold;
+}
